@@ -14,6 +14,7 @@ import {
   getSubCategories,
 } from '@/lib/home/queries/products'
 import { Metadata } from 'next'
+import ClipPathImage from './components/hero/clip-path'
 
 export async function generateMetadata(): Promise<Metadata> {
   // Fetch data for dynamic meta information
@@ -314,7 +315,10 @@ export default async function Home() {
           __html: JSON.stringify(breadcrumbData),
         }}
       />
-      <Hero subCategories={subCategories} />
+      {/* <Hero subCategories={subCategories} /> */}
+      <div className="relative h-full w-full">
+        <ClipPathImage />
+      </div>
       <div className="py-16">
         <StoreStatement />
       </div>
