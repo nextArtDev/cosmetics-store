@@ -12,6 +12,8 @@ import Image from 'next/image'
 import React, { FC } from 'react'
 import ClipPathImage from './clip-path'
 import StatsCarouselcount from './state-carousel'
+import Socials from './socials'
+import { Button } from '@/components/ui/button'
 
 type Product = {
   id: string
@@ -64,7 +66,7 @@ const ClipPathCarousel: FC<ClipPathCarouselProps> = ({ product }) => {
   //     })
   //   }, [api])
   return (
-    <section className="relative w-[90vw] mx-auto lg:w-1/2 h-full bg-red-500">
+    <section className="relative overflow-x-hidden w-full mx-auto max-w-sm h-full  ">
       {/* <TransitionLink href={`/products/${product.slug}`} className="my-6"> */}
       <TransitionLink href={`/`} className="my-4 relative w-full h-full">
         <Carousel
@@ -82,30 +84,41 @@ const ClipPathCarousel: FC<ClipPathCarouselProps> = ({ product }) => {
           //   setApi={setApi}
           className="w-full h-full"
         >
-          <div className="absolute inset-0 left-[15%]   -top-20">
+          <div className="absolute inset-0 right-[14%]   -top-20">
             <StatsCarouselcount
               title="CREATE STUNNING INTERFACES WITH SCROLLX UI COMPONENTS"
               stats={[
                 {
                   value: 40,
                   suffix: '+',
-                  label: 'Handcrafted animated components',
+                  label: 'Handcrafted animated',
                 },
                 {
                   value: 12,
                   suffix: 'K+',
-                  label: 'Developers building with ScrollX UI',
+                  label: 'Developers building',
                 },
                 {
                   value: 99,
                   suffix: '%',
-                  label: 'Performance optimized for web',
+                  label: 'Performance optimized',
                 },
               ]}
-              className="!w-[200px] md:!w-[300px]  h-[100px] "
+              className="!w-[60%] !h-[80px] "
               cardClassName="!p-1 rounded-t-4xl"
             />
           </div>
+          <div className="absolute w-full h-fit right-2 top-0.5  ">
+            <Socials />
+          </div>
+          <div className="absolute w-full h-fit  top-2 -left-[81%] ">
+            <Button className=" px-3.5 rounded-br-2xl ">SignUp</Button>
+          </div>
+          <div className="absolute pr-2 left-0 font-semibold  -bottom-0 max-w-1/2 w-[200px] text-pretty">
+            Lorem ipsum dolor sit amet consectetur adipisicing aicing elitadi
+            pisicing?
+          </div>
+
           <ClipPathImage>
             <CarouselContent className=" ">
               {/* {imageUrls.map((url) => ( */}

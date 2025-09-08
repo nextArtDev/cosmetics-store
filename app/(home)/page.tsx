@@ -317,7 +317,7 @@ export default async function Home() {
         }}
       />
       {/* <Hero subCategories={subCategories} /> */}
-      <div className="relative h-full w-full  flex items-center justify-center min-h-svh">
+      <div className="relative h-full w-full  flex items-center justify-center ">
         <ClipPathCarousel />
       </div>
       <div className="py-16">
