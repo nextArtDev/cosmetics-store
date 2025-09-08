@@ -14,6 +14,7 @@ import ClipPathImage from './clip-path'
 import StatsCarouselcount from './state-carousel'
 import Socials from './socials'
 import { Button } from '@/components/ui/button'
+import SmallCard from './small-card'
 
 type Product = {
   id: string
@@ -110,6 +111,9 @@ const ClipPathCarousel: FC<ClipPathCarouselProps> = ({ product }) => {
           </div>
           <div className="absolute w-full h-fit right-2 top-0.5  ">
             <Socials />
+          </div>
+          <div className="absolute w-[44%] h-[200px] right-2 top-[62%] z-20 ">
+            <SmallCard />
           </div>
           <div className="absolute w-full h-fit  top-2 -left-[81%] ">
             <Button className=" px-3.5 rounded-br-2xl ">SignUp</Button>
