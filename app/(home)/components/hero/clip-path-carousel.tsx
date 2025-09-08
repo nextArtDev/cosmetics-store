@@ -1,20 +1,19 @@
 'use client'
 import { TransitionLink } from '@/components/home/shared/TransitionLink'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import {
   Carousel,
-  CarouselApi,
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import ClipPathImage from './clip-path'
-import StatsCarouselcount from './state-carousel'
-import Socials from './socials'
-import { Button } from '@/components/ui/button'
 import SmallCard from './small-card'
+import Socials from './socials'
+import StatsCarouselcount from './state-carousel'
 
 type Product = {
   id: string
@@ -43,6 +42,7 @@ interface ClipPathCarouselProps {
   product?: Product
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ClipPathCarousel: FC<ClipPathCarouselProps> = ({ product }) => {
   //   const imageUrls = React.useMemo(
   //     () => [
@@ -92,21 +92,21 @@ const ClipPathCarousel: FC<ClipPathCarouselProps> = ({ product }) => {
                 {
                   value: 40,
                   suffix: '+',
-                  label: 'Handcrafted animated',
+                  label: 'محصول آرایشی،بهداشتی و زیبایی',
                 },
                 {
-                  value: 12,
+                  value: 4,
                   suffix: 'K+',
-                  label: 'Developers building',
+                  label: 'خریدار محصولات',
                 },
                 {
-                  value: 99,
+                  value: 98,
                   suffix: '%',
-                  label: 'Performance optimized',
+                  label: 'رضایت مصرف‌کننده',
                 },
               ]}
-              className="!w-[60%] !h-[80px] "
-              cardClassName="!p-1 rounded-t-4xl"
+              className="!w-[60%] !h-[80px]"
+              cardClassName="!p-1 rounded-t-3xl "
             />
           </div>
           <div className="absolute w-full h-fit right-2 top-0.5  ">
@@ -116,20 +116,25 @@ const ClipPathCarousel: FC<ClipPathCarouselProps> = ({ product }) => {
             <SmallCard />
           </div>
           <div className="absolute w-full h-fit  top-2 -left-[81%] ">
-            <Button className=" px-3.5 rounded-br-2xl ">SignUp</Button>
+            <Button className=" px-3.5 rounded-br-2xl bg-amber-500">
+              ثبت نام
+            </Button>
           </div>
-          <div className="absolute pr-2 left-0 font-semibold  -bottom-0 max-w-1/2 w-[200px] text-pretty">
-            Lorem ipsum dolor sit amet consectetur adipisicing aicing elitadi
-            pisicing?
+          <div className="absolute pr-2 pt-0.5 left-0 font-semibold  bottom-0.5 max-w-1/2 w-[180px] text-justify">
+            <p className="inline font-semibold text-red-500">نمایندگی فروش</p>
+            <p className="inline p-0.5 text-amber-900/60">
+              انواع لوازم آرایشی، بهداشتی و زیبایی معتبر و ارسال به سراسر کشور.
+            </p>
           </div>
 
           <ClipPathImage>
             <CarouselContent className=" ">
               {/* {imageUrls.map((url) => ( */}
               {[
-                '/images/hero-image.webp',
-                '/images/3.png',
-                '/images/4.png',
+                '/images/p1.webp',
+                '/images/06.webp',
+                '/images/p2.webp',
+                '/images/03.webp',
               ].map((url) => (
                 <CarouselItem key={url}>
                   <Card className="h-full w-full border-none rounded-none bg-[#eceae8] p-0 ">
@@ -140,7 +145,7 @@ const ClipPathCarousel: FC<ClipPathCarouselProps> = ({ product }) => {
                         // alt={product.name}
                         alt=""
                         fill
-                        className="object-contain  "
+                        className="object-cover  "
                         // sizes="(max-width: 768px) 50vw, 33vw"
                       />
                     </CardContent>

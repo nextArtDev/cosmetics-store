@@ -18,9 +18,9 @@ const Socials = () => {
               <Button
                 variant="outline"
                 size="icon"
-                className="rounded-full bg-white/20 backdrop-blur-sm"
+                className="rounded-xl border-amber-300 bg-white/20 backdrop-blur-sm"
               >
-                <Facebook className="h-2 w-2 bg-transparent" />
+                <Facebook className="h-2 w-2 text-amber-500 bg-transparent" />
                 <span className="sr-only">Facebook</span>
               </Button>
             </TooltipTrigger>
@@ -35,9 +35,9 @@ const Socials = () => {
               <Button
                 variant="outline"
                 size="icon"
-                className="rounded-full bg-white/20 backdrop-blur-sm"
+                className="rounded-xl border-amber-300 bg-white/20 backdrop-blur-sm"
               >
-                <TwitterIcon className="h-2 w-2 bg-transparent" />
+                <TwitterIcon className="h-2 w-2 text-amber-500 bg-transparent" />
                 <span className="sr-only">Twitter</span>
               </Button>
             </TooltipTrigger>
@@ -52,9 +52,9 @@ const Socials = () => {
               <Button
                 variant="outline"
                 size="icon"
-                className="rounded-full bg-white/20 backdrop-blur-sm"
+                className="rounded-xl border-amber-300 bg-white/20 backdrop-blur-sm"
               >
-                <Instagram className="h-2 w-2 bg-transparent" />
+                <Instagram className="h-2 w-2 text-amber-500 bg-transparent" />
                 <span className="sr-only">Instagram</span>
               </Button>
             </TooltipTrigger>

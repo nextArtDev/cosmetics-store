@@ -48,7 +48,7 @@ function StatsCarousel({
   }, [trigger, value, motionValue, rounded, onDone])
 
   return (
-    <div className="text-2xl font-extrabold text-white  ">
+    <div className="text-2xl font-extrabold text-red-300  ">
       {displayValue}
       {suffix}
     </div>
@@ -145,11 +145,11 @@ export default function StatsCarouselcount({
 
           let animate = { x: 0, y: baseY, scale }
           if (isTopCard && phase === 'down')
-            animate = { x: 0, y: baseY + 150, scale: 0.8 }
+            animate = { x: 0, y: baseY + 100, scale: 0.8 }
           if (!isTopCard && phase === 'stackUp')
             animate = { x: 0, y: baseY - 20, scale }
           if (isTopCard && phase === 'stackUp')
-            animate = { x: 0, y: baseY + 150, scale: 0.8 }
+            animate = { x: 0, y: baseY + 100, scale: 0.8 }
           if (isTopCard && phase === 'upReenter')
             animate = { x: 0, y: bottomIndex * 20, scale: bottomScale }
 
@@ -167,7 +167,7 @@ export default function StatsCarouselcount({
           return (
             <motion.div
               key={stat.id}
-              className="absolute left-0 right-0 mx-auto w-full"
+              className="absolute left-0 right-0 mx-auto w-full "
               style={{ zIndex }}
               animate={animate}
               transition={{ duration: 0.6, ease: 'easeInOut' }}
@@ -185,16 +185,16 @@ export default function StatsCarouselcount({
                     }
                   />
                 ) : shouldShowZero ? (
-                  <div className="text-2xl font-extrabold text-white ">
+                  <div className="text-2xl font-extrabold text-red-500 ">
                     0{stat.suffix}
                   </div>
                 ) : (
-                  <div className="text-2xl font-extrabold text-white ">
+                  <div className="text-2xl font-extrabold text-red-500 ">
                     {stat.value}
                     {stat.suffix}
                   </div>
                 )}
-                <p className="text-xs text-white   mt-1 text-center uppercase tracking-wide">
+                <p className="text-xs text-amber-500   mt-1 text-center uppercase tracking-wide">
                   {stat.label}
                 </p>
               </div>
