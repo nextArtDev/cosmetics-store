@@ -16,7 +16,7 @@ const Logo: FC<LogoProps> = ({ href = '/' }) => {
           className="object-cover scale-50"
         />
         {/* <Package2 className="h-6 w-6" /> */}
-        {/* <span className="font-bold inline-block">خارَک</span> */}
+        {/* <span className="font-bold inline-block">لوازم آرایشی</span> */}
       </TransitionLink>
     </div>
   )

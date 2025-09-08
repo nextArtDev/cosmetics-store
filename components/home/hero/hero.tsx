@@ -1,7 +1,7 @@
 import React from 'react'
 import { Bounded } from '@/components/shared/Bounded'
 import Image from 'next/image'
-import heroImage from '../../../public/images/hero-image.webp'
+import heroImage from '../../../public/images/p1.webp'
 // import heroImage from '../../../public/images/bg.jpg'
 
 import { FadeIn } from '@/components/shared/fade-in'
@@ -35,7 +35,7 @@ const Hero = ({
       <div className="relative flex h-screen flex-col justify-center items-center">
         <RevealText
           // text="Effortless Elegance"
-          text="کارگاه چرم خارَک"
+          text="فروشگاه لوازم آرایشی"
           id="hero-heading"
           className="font-display max-w-xl text-6xl leading-none text-neutral-50 md:text-7xl lg:text-8xl"
           staggerAmount={0.2}

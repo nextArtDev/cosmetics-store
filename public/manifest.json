@@ -1,7 +1,7 @@
 
 {
-  "name": "کارگاه چرم خارَک",
-  "short_name": "خارَک",
+  "name": "فروشگاه لوازم آرایشی",
+  "short_name": "لوازم آرایشی",
   "description": "فروش محصولات چرمی دست‌ساز",
   "start_url": "/",
   "display": "standalone",

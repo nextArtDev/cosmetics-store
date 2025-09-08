@@ -7,12 +7,12 @@ const getAllowedDomains = () => {
   const envDomains = process.env.ALLOWED_DOMAINS?.split(',') || []
 
   const baseDomains = [
-    'https://kharak.storage.c2.liara.space',
+    'https://mye-commerce.storage.iran.liara.space',
     'https://*.zarinpal.com',
     'https://*.better-auth.com',
     'https://api.github.com',
     'https://accounts.google.com',
-    'https://kharak.liara.run',
+    '',
     'https://api.twilio.com',
     'https://*.twilio.com',
     'https://api.kavenegar.com',
@@ -34,7 +34,7 @@ const getCorsOrigins = () => {
       'http://127.0.0.1:3000',
     ]
   }
-  return ['https://kharak.liara.run']
+  return ['']
 }
 
 const nextConfig: NextConfig = {
@@ -50,7 +50,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'kharak.storage.c2.liara.space',
+        hostname: 'mye-commerce.storage.iran.liara.space',
         pathname: '/**',
       },
     ],
@@ -74,8 +74,8 @@ const nextConfig: NextConfig = {
               `connect-src 'self' ${getAllowedDomains().join(' ')};`,
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;",
               "font-src 'self' https://fonts.gstatic.com data:;",
-              "img-src 'self' data: blob: https://kharak.storage.c2.liara.space https://*.zarinpal.com;",
-              "media-src 'self' blob: https://kharak.storage.c2.liara.space;",
+              "img-src 'self' data: blob: https://mye-commerce.storage.iran.liara.space https://*.zarinpal.com;",
+              "media-src 'self' blob: https://mye-commerce.storage.iran.liara.space;",
               "frame-src 'self' https://*.zarinpal.com;",
               "frame-ancestors 'none';",
               "worker-src 'self' blob:;",
@@ -123,13 +123,13 @@ const nextConfig: NextConfig = {
             value: [
               "default-src 'self';",
               "script-src 'self' 'unsafe-eval' 'unsafe-inline';",
-              `connect-src 'self' https://kharak.storage.c2.liara.space data: ${getAllowedDomains().join(
+              `connect-src 'self' https://mye-commerce.storage.iran.liara.space data: ${getAllowedDomains().join(
                 ' '
               )};`,
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;",
               "font-src 'self' https://fonts.gstatic.com data:;",
-              "img-src 'self' data: blob: https://kharak.storage.c2.liara.space https://*.zarinpal.com;",
-              "media-src 'self' blob: https://kharak.storage.c2.liara.space;",
+              "img-src 'self' data: blob: https://mye-commerce.storage.iran.liara.space https://*.zarinpal.com;",
+              "media-src 'self' blob: https://mye-commerce.storage.iran.liara.space;",
               "frame-src 'self' https://*.zarinpal.com;",
               "frame-ancestors 'none';",
               "worker-src 'self' blob:;",
@@ -244,12 +244,12 @@ export default nextConfig
 //   const envDomains = process.env.ALLOWED_DOMAINS?.split(',') || []
 
 //   const baseDomains = [
-//     'https://kharak.storage.c2.liara.space',
+//     'https://mye-commerce.storage.iran.liara.space',
 //     'https://*.zarinpal.com',
 //     'https://*.better-auth.com',
 //     'https://api.github.com',
 //     'https://accounts.google.com',
-//     'https://kharak.liara.run',
+//     '',
 //     'https://api.twilio.com',
 //     'https://*.twilio.com',
 //     'https://api.kavenegar.com',
@@ -271,7 +271,7 @@ export default nextConfig
 //       'http://127.0.0.1:3000',
 //     ]
 //   }
-//   return ['https://kharak.liara.run']
+//   return ['']
 // }
 
 // const nextConfig: NextConfig = {
@@ -287,7 +287,7 @@ export default nextConfig
 //     remotePatterns: [
 //       {
 //         protocol: 'https',
-//         hostname: 'kharak.storage.c2.liara.space',
+//         hostname: 'mye-commerce.storage.iran.liara.space',
 //         pathname: '/**',
 //       },
 //     ],
@@ -311,8 +311,8 @@ export default nextConfig
 //               `connect-src 'self' ${getAllowedDomains().join(' ')};`,
 //               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;",
 //               "font-src 'self' https://fonts.gstatic.com data:;",
-//               "img-src 'self' data: blob: https://kharak.storage.c2.liara.space https://*.zarinpal.com;",
-//               "media-src 'self' blob: https://kharak.storage.c2.liara.space;",
+//               "img-src 'self' data: blob: https://mye-commerce.storage.iran.liara.space https://*.zarinpal.com;",
+//               "media-src 'self' blob: https://mye-commerce.storage.iran.liara.space;",
 //               "frame-src 'self' https://*.zarinpal.com;",
 //               "frame-ancestors 'none';",
 //               "worker-src 'self' blob:;",
@@ -363,13 +363,13 @@ export default nextConfig
 //             value: [
 //               "default-src 'self';",
 //               "script-src 'self' 'unsafe-eval' 'unsafe-inline';",
-//               `connect-src 'self' https://kharak.storage.c2.liara.space data: ${getAllowedDomains().join(
+//               `connect-src 'self' https://mye-commerce.storage.iran.liara.space data: ${getAllowedDomains().join(
 //                 ' '
 //               )};`,
 //               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;",
 //               "font-src 'self' https://fonts.gstatic.com data:;",
-//               "img-src 'self' data: blob: https://kharak.storage.c2.liara.space https://*.zarinpal.com;",
-//               "media-src 'self' blob: https://kharak.storage.c2.liara.space;",
+//               "img-src 'self' data: blob: https://mye-commerce.storage.iran.liara.space https://*.zarinpal.com;",
+//               "media-src 'self' blob: https://mye-commerce.storage.iran.liara.space;",
 //               "frame-src 'self' https://*.zarinpal.com;",
 //               "frame-ancestors 'none';",
 //               "worker-src 'self' blob:;",

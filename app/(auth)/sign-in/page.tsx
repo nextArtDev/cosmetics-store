@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import Image from 'next/image'
-import heroImage from '../../../public/images/hero-image.webp'
+import heroImage from '../../../public/images/p1.webp'
 
 export const dynamic = 'force-dynamic'
 

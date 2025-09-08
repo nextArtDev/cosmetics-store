@@ -1,6 +1,4 @@
-import React, { ReactNode } from 'react'
-import Image from 'next/image'
-import heroImage from '../../../../public/images/hero-image.webp'
+import { ReactNode } from 'react'
 
 function ClipPathImage({ children }: { children: ReactNode }) {
   return (

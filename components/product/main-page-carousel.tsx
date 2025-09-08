@@ -14,6 +14,7 @@ import { useInView } from 'framer-motion'
 import Autoplay from 'embla-carousel-autoplay'
 import { cn } from '@/lib/utils'
 import { TransitionLink } from '../home/shared/TransitionLink'
+import ProductClipPath from './product-clip-path'
 
 export type item = {
   id: string
@@ -53,11 +54,10 @@ export default function MainPageCarousel({ items }: MainPageCarousel) {
       ref={carouselRef}
     >
       <CarouselContent className="-ml-1 md:-ml-2 xl:-ml-4">
-        {/* /* Negative margin to offset item padding   */}
         {items.map((item, i) => (
           <CarouselItem
-            key={item.id} // Changed to item.id for unique keys (item.title might not be unique)
-            className="pl-1 basis-1/2 md:pl-2 md:basis-1/3 lg:basis-1/4 xl:pl-4 xl:basis-1/5" /* Responsive padding and basis */
+            key={item.id}
+            className="pl-1 basis-1/2 md:pl-2 md:basis-1/3 lg:basis-1/4 xl:pl-4 xl:basis-1/5  "
           >
             <FadeIn
               className="translate-y-5"
@@ -65,32 +65,50 @@ export default function MainPageCarousel({ items }: MainPageCarousel) {
             >
               <TransitionLink
                 href={`/products/${item.slug}`}
-                className="flex flex-col border-none rounded-none bg-transparent gap-4" /* Switched to flex-col for consistent height; moved gap here */
+                className="flex flex-col border-none rounded-none bg-transparent gap-4"
               >
                 {!!item.images && (
-                  <figure className="relative w-full aspect-square bg-[#eceae8] border-none rounded-none">
-                    {' '}
-                    {/* Fixed aspect-square for uniform image height */}
-                    <Image
-                      unoptimized
-                      src={
-                        item.images.map((img) => img.url)[0] ||
-                        '/images/fallback-image.webp'
-                      }
-                      fill
-                      alt={item.name!}
-                      className="object-cover mix-blend-darken" // Uncommented; remove if not needed
-                    />
+                  <figure className="relative w-full aspect-square bg-transparent border-none rounded-none">
+                    <ProductClipPath
+                      // Pass a unique ID for each product's clipPath
+                      clipPathId={`clipPath-${item.id}`}
+                      discounted={!!item.sizes?.map((s) => s.discount)?.[0]}
+                    >
+                      <Image
+                        unoptimized
+                        src={
+                          item.images.map((img) => img.url)[0] ||
+                          '/images/fallback-image.webp'
+                        }
+                        fill
+                        alt={item.name!}
+                        className="object-cover mix-blend-darken"
+                      />
+                    </ProductClipPath>
+
+                    {!!item.sizes && (
+                      <>
+                        {item.sizes.map((size, i) => (
+                          <div key={i} className="flex items-center gap-1">
+                            {!!size.discount && (
+                              <p className="text-red-500 rounded-md absolute top-0 left-0.5 bg-orange-500/20 px-2.5 py-1.25 backdrop-blur-sm border border-l-orange-500">
+                                %{size.discount}
+                              </p>
+                            )}
+                            <p className="text-black/90 w-1/2 rounded-md absolute bottom-0.5 right-0 bg-orange-500/20 flex items-center justify-center py-1 backdrop-blur-sm border border-r-orange-500">
+                              {size.price - size.price * (size.discount / 100)}{' '}
+                              تومان
+                            </p>
+                          </div>
+                        ))}
+                      </>
+                    )}
                   </figure>
                 )}
                 <article className="flex flex-col gap-1 justify-evenly py-3 px-2 text-pretty text-xs md:text-sm lg:text-base">
                   <p className="font-semibold">{item.category!.name}</p>
-                  {/* <p
-                  dangerouslySetInnerHTML={{ __html: item.description }}
-                  className="font-bold line-clamp-2 text-justify "
-                  ></p> */}
                   <p className="font-bold">{item.name}</p>
-                  {!!item.sizes && (
+                  {/* {!!item.sizes && (
                     <>
                       {item.sizes.map((size, i) => (
                         <div key={i} className="flex items-center gap-1">
@@ -108,12 +126,7 @@ export default function MainPageCarousel({ items }: MainPageCarousel) {
                         </div>
                       ))}
                     </>
-                  )}
-                  {/* <p>
-                    {item.sizes.map((size) =>
-                      size.discount ? size.price * size.discount : size.price
-                    )}
-                  </p> */}
+                  )} */}
                 </article>
               </TransitionLink>
             </FadeIn>
