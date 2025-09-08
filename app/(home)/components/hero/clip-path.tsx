@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import Image from 'next/image'
 import heroImage from '../../../../public/images/hero-image.webp'
 
-function ClipPathImage() {
+function ClipPathImage({ children }: { children: ReactNode }) {
   return (
-    <section className="relative w-full h-screen flex items-center justify-center">
+    <section className="relative w-full h-full  ">
       {/* Visible SVG for clipPath definition */}
       <svg width="0" height="0" className="absolute">
         <defs>
@@ -16,18 +16,19 @@ function ClipPathImage() {
       </svg>
 
       {/* Container with clip-path applied */}
-      <div className="relative w-72 h-96 md:w-96 md:h-[500px]">
+      <div className="relative w-full h-full">
         <div
           style={{ clipPath: 'url(#differentone23)' }}
           className="w-full h-full"
         >
-          <Image
+          {/* <Image
             src={heroImage}
             alt="Hero image with custom clip path"
             fill
             className="object-cover"
             placeholder="blur"
-          />
+          /> */}
+          {children}
         </div>
       </div>
     </section>

@@ -1,0 +1,160 @@
+'use client'
+import { TransitionLink } from '@/components/home/shared/TransitionLink'
+import { Card, CardContent } from '@/components/ui/card'
+import {
+  Carousel,
+  CarouselApi,
+  CarouselContent,
+  CarouselItem,
+} from '@/components/ui/carousel'
+import Autoplay from 'embla-carousel-autoplay'
+import Image from 'next/image'
+import React, { FC } from 'react'
+import ClipPathImage from './clip-path'
+import StatsCarouselcount from './state-carousel'
+
+type Product = {
+  id: string
+  name: string
+  slug: string
+  brand: string
+  rating: number
+  sales: number
+  numReviews: number
+  isSale: boolean
+  saleEndDate: string | null
+  images: { url: string }[]
+  variantImages: { url: string }[]
+  sizes: {
+    size: string
+    quantity: number
+    price: number
+    discount: number
+  }[]
+  colors: { name: string }[]
+  category?: { name: string; url: string }
+  subCategory?: { name: string; url: string }
+}
+
+interface ClipPathCarouselProps {
+  product?: Product
+}
+
+const ClipPathCarousel: FC<ClipPathCarouselProps> = ({ product }) => {
+  //   const imageUrls = React.useMemo(
+  //     () => [
+  //       ...(product.images?.map((img) => img.url) || []),
+  //       ...(product.variantImages?.map((img) => img.url) || []),
+  //     ],
+  //     [product.images, product.variantImages]
+  //   )
+
+  //   const [api, setApi] = React.useState<CarouselApi>()
+  //   const [current, setCurrent] = React.useState(0)
+  //   const [count, setCount] = React.useState(0)
+
+  //   React.useEffect(() => {
+  //     if (!api) return
+
+  //     setCount(api.scrollSnapList().length)
+  //     setCurrent(api.selectedScrollSnap())
+
+  //     api.on('select', () => {
+  //       setCurrent(api.selectedScrollSnap())
+  //     })
+  //   }, [api])
+  return (
+    <section className="relative w-[90vw] mx-auto lg:w-1/2 h-full bg-red-500">
+      {/* <TransitionLink href={`/products/${product.slug}`} className="my-6"> */}
+      <TransitionLink href={`/`} className="my-4 relative w-full h-full">
+        <Carousel
+          opts={{
+            align: 'start',
+            direction: 'rtl',
+            loop: true,
+          }}
+          plugins={[
+            Autoplay({
+              delay: 3000,
+            }),
+          ]}
+          dir="rtl"
+          //   setApi={setApi}
+          className="w-full h-full"
+        >
+          <div className="absolute inset-0 left-[15%]   -top-20">
+            <StatsCarouselcount
+              title="CREATE STUNNING INTERFACES WITH SCROLLX UI COMPONENTS"
+              stats={[
+                {
+                  value: 40,
+                  suffix: '+',
+                  label: 'Handcrafted animated components',
+                },
+                {
+                  value: 12,
+                  suffix: 'K+',
+                  label: 'Developers building with ScrollX UI',
+                },
+                {
+                  value: 99,
+                  suffix: '%',
+                  label: 'Performance optimized for web',
+                },
+              ]}
+              className="!w-[200px] md:!w-[300px]  h-[100px] "
+              cardClassName="!p-1 rounded-t-4xl"
+            />
+          </div>
+          <ClipPathImage>
+            <CarouselContent className=" ">
+              {/* {imageUrls.map((url) => ( */}
+              {[
+                '/images/hero-image.webp',
+                '/images/3.png',
+                '/images/4.png',
+              ].map((url) => (
+                <CarouselItem key={url}>
+                  <Card className="h-full w-full border-none rounded-none bg-[#eceae8] p-0 ">
+                    <CardContent className="relative flex  items-center justify-center p-0 h-[80vh] ">
+                      <Image
+                        unoptimized
+                        src={url || '/images/fallback-image.webp'}
+                        // alt={product.name}
+                        alt=""
+                        fill
+                        className="object-contain  "
+                        // sizes="(max-width: 768px) 50vw, 33vw"
+                      />
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </ClipPathImage>
+        </Carousel>
+
+        {/* {count > 1 && (
+          <div className="absolute -bottom-[1px] left-0.25 right-0.25 flex items-center gap-x-0.5 z-10">
+            {Array.from({ length: count }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => api?.scrollTo(index)}
+                className={cn(
+                  'h-0.25 md:h-[1.5px] flex-1 rounded-full',
+                  current === index
+                    ? 'bg-muted-foreground'
+                    : 'bg-muted-foreground/30',
+                  'transition-colors duration-200 ease-in-out'
+                )}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        )} */}
+      </TransitionLink>
+    </section>
+  )
+}
+
+export default ClipPathCarousel
