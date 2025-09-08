@@ -12,7 +12,6 @@ import { HomepageProduct } from '@/lib/types/home'
 import { FadeIn } from '../shared/fade-in'
 import { useInView } from 'framer-motion'
 import Autoplay from 'embla-carousel-autoplay'
-import { cn } from '@/lib/utils'
 import { TransitionLink } from '../home/shared/TransitionLink'
 import ProductClipPath from './product-clip-path'
 
@@ -65,7 +64,7 @@ export default function MainPageCarousel({ items }: MainPageCarousel) {
             >
               <TransitionLink
                 href={`/products/${item.slug}`}
-                className="flex flex-col border-none rounded-none bg-transparent gap-4"
+                className="flex flex-col border-none rounded-none bg-transparent gap-2"
               >
                 {!!item.images && (
                   <figure className="relative w-full aspect-square bg-transparent border-none rounded-none">
@@ -95,7 +94,7 @@ export default function MainPageCarousel({ items }: MainPageCarousel) {
                                 %{size.discount}
                               </p>
                             )}
-                            <p className="text-black/90 w-1/2 rounded-md absolute bottom-0.5 right-0 bg-orange-500/20 flex items-center justify-center py-1 backdrop-blur-sm border border-r-orange-500">
+                            <p className="text-black/90 w-1/2 rounded-md absolute bottom-0.5 right-0 bg-orange-500/10 flex items-center justify-center py-1 backdrop-blur-sm border border-r-orange-500">
                               {size.price - size.price * (size.discount / 100)}{' '}
                               تومان
                             </p>
@@ -105,8 +104,8 @@ export default function MainPageCarousel({ items }: MainPageCarousel) {
                     )}
                   </figure>
                 )}
-                <article className="flex flex-col gap-1 justify-evenly py-3 px-2 text-pretty text-xs md:text-sm lg:text-base">
-                  <p className="font-semibold">{item.category!.name}</p>
+                <article className="flex  flex-row-reverse gap-1 justify-between py-1 px-2 text-pretty text-xs md:text-sm lg:text-base">
+                  <p className="font-semibold">{item?.brand}</p>
                   <p className="font-bold">{item.name}</p>
                   {/* {!!item.sizes && (
                     <>

@@ -77,6 +77,7 @@ export async function getBestSellers(limit: number = 8) {
       rating: true,
       sales: true,
       description: true,
+      brand: true,
       images: {
         take: 1,
         select: {

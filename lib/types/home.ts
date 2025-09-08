@@ -58,6 +58,7 @@ export type HomepageProduct = {
   rating: number
   isFeatured: boolean
   isSale: boolean
+  brand: string
   saleEndDate: string | null
   images: BasicProductImage[]
   sizes: BasicProductSize[]

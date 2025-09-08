@@ -6,6 +6,7 @@ import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { FadeIn } from '@/components/shared/fade-in'
 import { RevealText } from '@/components/shared/reveal-text'
+import Image from 'next/image'
 
 // --- Animation Component Definition ---
 // The FlowerAnimation component is now defined in the same file to avoid import issues.
@@ -346,6 +347,35 @@ const FlowerAnimation = () => {
       viewBox="0 0 641.5 637.3"
       className="flowerFrame"
     >
+      <defs>
+        <clipPath id="center-circle-clip">
+          {/*
+        The center is (641.5 / 2) = 320.75 and (637.3 / 2) = 318.65
+        Let's give it a radius of 200 for this example.
+      */}
+          <circle cx="320.75" cy="318.65" r="200" />
+        </clipPath>
+      </defs>
+
+      {/* Optional: Add a background color circle behind the image */}
+      <circle cx="320.75" cy="318.65" r="200" fill="#f0f0f0" />
+
+      {/*
+    Place the image and apply the clip path.
+    - x = centerX - radius
+    - y = centerY - radius
+    - width/height = radius * 2
+  */}
+      <image
+        href="/images/p2.webp"
+        x="120.75" // 320.75 - 200
+        y="118.65" // 318.65 - 200
+        width="400" // 200 * 2
+        height="400" // 200 * 2
+        clip-path="url(#center-circle-clip)"
+        className="object-contain rounded-full"
+      />
+
       <g id="Footer_group_1_">
         <path
           id="Dots_1_"
@@ -954,6 +984,7 @@ const FlowerAnimation = () => {
             </g>
           </g>
         </g>
+
         <g id="LeftGroup_1_">
           <g id="LeftTopGroup_1_">
             <g id="StrokesGroup15_1_">
@@ -1771,6 +1802,16 @@ export const StyledFlower = () => {
       <section className="relative w-full h-full">
         <div className="  w-full mx-auto md:w-3/4 lg:w-1/2">
           <FlowerAnimation />
+          {/* <div className="absolute inset-0">
+            <figure className="relative w-52 h-52 rounded-full">
+              <Image
+                fill
+                src={'/images/p1.webp'}
+                alt=""
+                className="object-contain"
+              />
+            </figure>
+          </div> */}
         </div>
         <div className="sticky inset-0  flex flex-col items-center justify-center  gap-4 ">
           <RevealText
