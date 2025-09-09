@@ -15,6 +15,7 @@ import {
 } from '@/lib/home/queries/products'
 import { Metadata } from 'next'
 import ClipPathCarousel from './components/hero/clip-path-carousel'
+import Stats from './components/infinite-slider/Stats'
 
 export async function generateMetadata(): Promise<Metadata> {
   // Fetch data for dynamic meta information
@@ -319,9 +320,13 @@ export default async function Home() {
       <div className="relative h-full w-full  flex items-center justify-center pt-28 ">
         <ClipPathCarousel />
       </div>
-      <div className="py-16">
+      <div className="py-4">
         <StoreStatement />
       </div>
+      <div className="py-4 w-full h-full">
+        <Stats />
+      </div>
+
       {!!bestSellers && (
         <section className="w-full h-full flex flex-col gap-8 py-8 px-3 ">
           <h2 className="text-xl md:text-3xl font-bold uppercase text-center py-8">
