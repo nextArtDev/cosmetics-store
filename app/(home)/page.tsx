@@ -16,6 +16,7 @@ import {
 import { Metadata } from 'next'
 import ClipPathCarousel from './components/hero/clip-path-carousel'
 import Stats from './components/infinite-slider/Stats'
+import StoryCarousel from '@/components/home/shared/StoryCarouse'
 
 export async function generateMetadata(): Promise<Metadata> {
   // Fetch data for dynamic meta information
@@ -317,6 +318,9 @@ export default async function Home() {
         }}
       />
       {/* <Hero subCategories={subCategories} /> */}
+      <div className="w-full h-full relative py-24">
+        <StoryCarousel />
+      </div>
       <div className="relative h-full w-full  flex items-center justify-center pt-28 ">
         <ClipPathCarousel />
       </div>
