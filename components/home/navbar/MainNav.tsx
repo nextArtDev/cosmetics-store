@@ -58,23 +58,23 @@ export default function MainNav({
   }, [])
 
   return (
-    <div className="bg-background">
+    <div className=" ">
       <header className="relative">
         <nav aria-label="Main navigation">
           <TopBanner />
 
           <div className="">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="flex h-16 items-center justify-between">
-                <div className="flex flex-1 items-center lg:hidden">
+              <div className=" flex h-16 items-center justify-between">
+                <div className="flex flex-1 items-center lg:hidden z-50 ">
                   <MobileNav navigation={navigation} session={session} />
                 </div>
 
-                <div className="lg:hidden">
+                {/* <div className="lg:hidden">
                   <Logo />
-                </div>
+                </div> */}
 
-                <div className="flex flex-1 items-center justify-end lg:justify-start">
+                <div className=" flex flex-1 items-center justify-end lg:justify-start">
                   <div className="flex lg:flex-row-reverse items-center space-x-4">
                     <SearchBar
                       isOpen={isSearchOpen}
@@ -90,9 +90,9 @@ export default function MainNav({
                     <DrawerCart />
                   </div>
                 </div>
-                <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center">
+                {/* <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center">
                   <Logo />
-                </div>
+                </div> */}
 
                 <div className="hidden lg:items-center h-full lg:flex">
                   <DesktopNav navigation={navigation} session={session} />

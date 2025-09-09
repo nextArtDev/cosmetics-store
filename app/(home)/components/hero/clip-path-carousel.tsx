@@ -120,9 +120,9 @@ const ClipPathCarousel: FC<ClipPathCarouselProps> = ({ product }) => {
               ثبت نام
             </Button>
           </div>
-          <div className="absolute pr-2 pt-0.5 left-0 font-semibold  bottom-0.5 max-w-1/2 w-[180px] text-justify">
+          <div className="absolute pr-2 pt-0.5 left-0 font-semibold  bottom-0.5 max-w-1/2 w-[180px] text-pretty">
             <p className="inline font-semibold text-red-500">نمایندگی فروش</p>
-            <p className="inline p-0.5 text-amber-900/60">
+            <p className="inline p-0.5 text-amber-900/60  !leading-0.25">
               انواع لوازم آرایشی، بهداشتی و زیبایی معتبر و ارسال به سراسر کشور.
             </p>
           </div>
@@ -131,9 +131,9 @@ const ClipPathCarousel: FC<ClipPathCarouselProps> = ({ product }) => {
             <CarouselContent className=" ">
               {/* {imageUrls.map((url) => ( */}
               {[
-                '/images/p1.webp',
-                '/images/06.webp',
                 '/images/p2.webp',
+                '/images/06.webp',
+                '/images/p3.webp',
                 '/images/03.webp',
               ].map((url) => (
                 <CarouselItem key={url}>

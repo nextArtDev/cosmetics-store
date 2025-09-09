@@ -26,7 +26,7 @@ function ProductClipPath({
         </defs>
       </svg>
 
-      {/* Container with clip-path applied using the unique ID */}
+      {/* Container with clipPath applied using the unique ID */}
       <div className="relative w-full h-full">
         <div
           style={{ clipPath: `url(#${clipPathId})` }}

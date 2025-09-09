@@ -1,5 +1,5 @@
 import DiscoverMoreCarousel from '@/components/home/discover-more/DiscoverMoreCarousel'
-import Hero from '@/components/home/hero/hero'
+// import Hero from '@/components/home/hero/hero'
 import Commitments from '@/components/home/shared/Commitments'
 import StoreStatement from '@/components/home/shared/StoreStatement'
 import WorkVideo from '@/components/home/shared/WorkVideo'
@@ -14,7 +14,6 @@ import {
   getSubCategories,
 } from '@/lib/home/queries/products'
 import { Metadata } from 'next'
-import ClipPathImage from './components/hero/clip-path'
 import ClipPathCarousel from './components/hero/clip-path-carousel'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -317,7 +316,7 @@ export default async function Home() {
         }}
       />
       {/* <Hero subCategories={subCategories} /> */}
-      <div className="relative h-full w-full  flex items-center justify-center ">
+      <div className="relative h-full w-full  flex items-center justify-center pt-28 ">
         <ClipPathCarousel />
       </div>
       <div className="py-16">

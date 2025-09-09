@@ -26,7 +26,7 @@ const Navbar = async () => {
   }
   //   console.log(navigation)
   return (
-    <div>
+    <div className="bg-white/10 backdrop-blur-md fixed w-full h-fit z-40">
       <MainNav navigation={navigation} session={session} />
     </div>
   )

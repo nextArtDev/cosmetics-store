@@ -88,15 +88,15 @@ export default function MainPageCarousel({ items }: MainPageCarousel) {
                     {!!item.sizes && (
                       <>
                         {item.sizes.map((size, i) => (
-                          <div key={i} className="flex items-center gap-1">
+                          <div key={i} className="flex items-center gap-0.5">
                             {!!size.discount && (
                               <p className="text-red-500 rounded-md absolute top-0 left-0.5 bg-orange-500/20 px-2.5 py-1.25 backdrop-blur-sm border border-l-orange-500">
                                 %{size.discount}
                               </p>
                             )}
-                            <p className="text-black/90 w-1/2 rounded-md absolute bottom-0.5 right-0 bg-orange-500/10 flex items-center justify-center py-1 backdrop-blur-sm border border-r-orange-500">
+                            <p className="text-black/90 w-1/3 rounded-md absolute bottom-0.5 right-3 bg-orange-500/10 flex items-center justify-center py-1 backdrop-blur-sm border border-r-orange-500">
                               {size.price - size.price * (size.discount / 100)}{' '}
-                              تومان
+                              {/* تومان */}
                             </p>
                           </div>
                         ))}

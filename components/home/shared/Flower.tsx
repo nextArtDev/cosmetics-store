@@ -6,7 +6,6 @@ import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { FadeIn } from '@/components/shared/fade-in'
 import { RevealText } from '@/components/shared/reveal-text'
-import Image from 'next/image'
 
 // --- Animation Component Definition ---
 // The FlowerAnimation component is now defined in the same file to avoid import issues.
@@ -372,7 +371,7 @@ const FlowerAnimation = () => {
         y="118.65" // 318.65 - 200
         width="400" // 200 * 2
         height="400" // 200 * 2
-        clip-path="url(#center-circle-clip)"
+        clipPath="url(#center-circle-clip)"
         className="object-contain rounded-full"
       />
 
@@ -1738,24 +1737,24 @@ export const StyledFlower = () => {
         }
         .flowerFrame .st1 {
           fill: none;
-          stroke: #215f7e;
+          stroke: #2cfc2c;
           stroke-width: 2;
           stroke-linecap: round;
           stroke-linejoin: round;
         }
         .flowerFrame .st2 {
-          fill: #64c1bb;
+          fill: #eed3a2;
         }
         .flowerFrame .st3 {
           fill: none;
-          stroke: #21a5af;
+          stroke: #fc7474;
           stroke-width: 2;
           stroke-linecap: round;
           stroke-linejoin: round;
         }
         .flowerFrame .st4 {
           fill: none;
-          stroke: #21a5af;
+          stroke: #f18f34;
           stroke-linecap: round;
           stroke-linejoin: round;
         }
@@ -1763,11 +1762,11 @@ export const StyledFlower = () => {
           fill: #fcd8c5;
         }
         .flowerFrame .st6 {
-          fill: #21a5af;
+          fill: #aefd1a;
         }
         .flowerFrame .st7 {
           fill: none;
-          stroke: #21a5af;
+          stroke: #ebf745;
           stroke-width: 4;
           stroke-linecap: round;
           stroke-linejoin: round;
@@ -1779,10 +1778,10 @@ export const StyledFlower = () => {
           fill: #f3ce7f;
         }
         .flowerFrame .st10 {
-          fill: #14a4ae;
+          fill: #8dfa44;
         }
         .flowerFrame .st11 {
-          fill: #61bfba;
+          fill: #ffdb3d;
         }
         .flowerFrame .st12 {
           fill: #fdd9c6;

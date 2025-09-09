@@ -75,7 +75,7 @@ export default function MobileNav({ navigation, session }: MobileNavProps) {
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <motion.div
-              className="border-border bg-background fixed top-16 right-4 z-50 w-80 max-h-[80vh] overflow-y-auto rounded-sm border shadow-2xl lg:hidden"
+              className="border-border bg-white/50 backdrop-blur-2xl fixed top-16 right-4 z-50 w-80 max-h-[80vh] overflow-y-auto rounded-sm border shadow-2xl lg:hidden"
               style={{
                 overflowX: 'hidden', // Prevent horizontal scrolling
                 width: 'calc(100vw - 2rem)', // Responsive width
