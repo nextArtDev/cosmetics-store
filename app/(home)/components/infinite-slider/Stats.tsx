@@ -47,12 +47,9 @@ const logos = [
 ]
 const Stats = () => {
   return (
-    <div
-      dir="ltr"
-      className="w-full h-full flex flex-col gap-4 items-center justify-center"
-    >
+    <div className=" flex flex-col gap-4 items-center justify-center overflow-x-hidden">
       <h1 className="sr-only">برند محصولات</h1>
-      <InfiniteSlider gap={12} reverse>
+      <InfiniteSlider reverse>
         {logos.slice(0, 5).map((logo) => (
           <figure key={logo.id} className={cn('relative w-fit h-[150px')}>
             <Image
@@ -65,7 +62,7 @@ const Stats = () => {
           </figure>
         ))}
       </InfiniteSlider>
-      <InfiniteSlider gap={12}>
+      <InfiniteSlider>
         {logos.slice(5, 11).map((logo) => (
           <figure key={logo.id} className={cn('relative w-fit h-[150px')}>
             <Image
@@ -78,7 +75,7 @@ const Stats = () => {
           </figure>
         ))}
       </InfiniteSlider>
-      <InfiniteSlider gap={12} reverse>
+      <InfiniteSlider reverse>
         {logos.slice(11).map((logo) => (
           <figure key={logo.id} className={cn('relative w-fit h-[150px')}>
             <Image

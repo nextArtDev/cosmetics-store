@@ -5,6 +5,8 @@ import {
   CarouselApi,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from '@/components/ui/carousel'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
@@ -17,20 +19,20 @@ type Props = {
 
 const ProductDetailCarousel = ({ images }: Props) => {
   const [api, setApi] = React.useState<CarouselApi>()
-  const [current, setCurrent] = React.useState(0)
-  const [count, setCount] = React.useState(0)
+  // const [current, setCurrent] = React.useState(0)
+  // const [count, setCount] = React.useState(0)
   React.useEffect(() => {
     if (!api) {
       return
     }
-    setCount(api.scrollSnapList().length)
-    setCurrent(api.selectedScrollSnap() + 1)
+    // setCount(api.scrollSnapList().length)
+    // setCurrent(api.selectedScrollSnap() + 1)
     api.on('select', () => {
-      setCurrent(api.selectedScrollSnap() + 1)
+      // setCurrent(api.selectedScrollSnap() + 1)
     })
   }, [api])
   return (
-    <section className="relative w-fit   mx-auto">
+    <section className="relative  pt-28  mx-auto">
       <Carousel
         setApi={setApi}
         opts={{ align: 'start', loop: true }}
@@ -69,18 +71,7 @@ const ProductDetailCarousel = ({ images }: Props) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {/* <CarouselPrevious /> <CarouselNext /> */}
-        <div className="absolute top-1/3 left-3  w-fit mt-4  flex flex-col items-center justify-between gap-2">
-          {Array.from({ length: count }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => api?.scrollTo(index)}
-              className={cn('h-0.5 w-0.5 bg-foreground/40', {
-                'h-1 w-1 bg-foreground': current === index + 1,
-              })}
-            />
-          ))}{' '}
-        </div>
+        <CarouselPrevious /> <CarouselNext />
       </Carousel>
     </section>
   )
