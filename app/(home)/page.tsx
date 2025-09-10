@@ -318,10 +318,10 @@ export default async function Home() {
         }}
       />
       {/* <Hero subCategories={subCategories} /> */}
-      <div className="w-full h-full relative py-24">
+      <div className="w-full h-full relative pt-8">
         <StoryCarousel />
       </div>
-      <div className="relative h-full w-full  flex items-center justify-center pt-28 ">
+      <div className="relative h-full w-full  flex items-center justify-center ">
         <ClipPathCarousel />
       </div>
       <div className="py-4">

@@ -21,12 +21,12 @@ const FABRIZIO_STORIES = [
   {
     title: 'Champions league will begin soon',
     caption: 'whos you are running for ?',
-    storyImage: '/images/1.webp',
+    storyImage: '/images/01.webp',
   },
   {
     title: "who's your favourite player ?",
     caption: 'who you think will win the champions league ?',
-    storyImage: '/images/2.webp',
+    storyImage: '/images/02.webp',
   },
 ]
 
@@ -34,7 +34,7 @@ const SHADCN_STORIES = [
   {
     title: 'Easy vibes',
     caption: 'In the System Prompts.',
-    storyImage: '/images/3.webp',
+    storyImage: '/images/03.webp',
   },
   {
     title: 'The new calendar.tsx is here',
@@ -45,12 +45,12 @@ const SHADCN_STORIES = [
       → Persian, Hijri & timezone support
       → 30+ examples to copy, paste, and build.
     `,
-    storyImage: '/images/4.webp',
+    storyImage: '/images/04.webp',
   },
   {
     title: '🤣🤣🤣🤣🤣',
     caption: 'Me walking away after adding min-w-0 and it works.',
-    storyImage: '/images/1.webp',
+    storyImage: '/images/01.webp',
   },
 ]
 
@@ -59,7 +59,7 @@ const NBA_STORIES = [
     title: 'Shai follows 38 in Game 1 with 34 tonight 🔥🔥🔥',
     caption:
       'MOST POINTS EVER by a player in his first 2 career Finals games 🚨🚨',
-    storyImage: '/images/1.webp',
+    storyImage: '/images/01.webp',
   },
 ]
 
@@ -70,9 +70,17 @@ const StoryCarousel = () => {
         {/* ======== FABRIZIO STORIES ======== */}
         <Dialog>
           <DialogTrigger>
-            <Avatar className="size-12">
-              <AvatarImage src="/images/01.webp" />
-              <AvatarFallback>FR</AvatarFallback>
+            <Avatar className="size-24">
+              <span
+                aria-hidden="true"
+                className="inline-flex size-full rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-1"
+              >
+                <AvatarImage
+                  src="/images/01.webp"
+                  className="rounded-full cursor-pointer"
+                />
+                <AvatarFallback>FR</AvatarFallback>
+              </span>
             </Avatar>
           </DialogTrigger>
           <DialogContent className="aspect-[12/16] w-auto h-[90vh] overflow-hidden p-0">
@@ -93,7 +101,7 @@ const StoryCarousel = () => {
             >
               <DialogHeader className="px-4 py-6">
                 <div className="relative z-10 flex items-center gap-2">
-                  <Avatar className="size-10">
+                  <Avatar className="size-20">
                     <AvatarImage src="/images/05.webp" alt="@fabrizioRomano" />
                     <AvatarFallback>FR</AvatarFallback>
                   </Avatar>
@@ -144,9 +152,18 @@ const StoryCarousel = () => {
         {/* ======== SHADCN STORIES ======== */}
         <Dialog>
           <DialogTrigger>
-            <Avatar className="size-12">
-              <AvatarImage src="/images/04.webp" alt="@shadcn" />
-              <AvatarFallback>SC</AvatarFallback>
+            <Avatar className="size-24">
+              <span
+                aria-hidden="true"
+                className="inline-flex size-full rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-1"
+              >
+                <AvatarImage
+                  src="/images/04.webp"
+                  alt="@shadcn"
+                  className="rounded-full cursor-pointer"
+                />
+                <AvatarFallback>SC</AvatarFallback>
+              </span>
             </Avatar>
           </DialogTrigger>
           <DialogContent className="aspect-[12/16] w-auto h-[90vh] overflow-hidden p-0 rounded-md">
@@ -167,7 +184,11 @@ const StoryCarousel = () => {
               <DialogHeader className="px-4 py-6">
                 <div className="relative z-10 flex items-center gap-2">
                   <Avatar className="size-10">
-                    <AvatarImage src="/images/03.webp" alt="@shadcn" />
+                    <AvatarImage
+                      src="/images/03.webp"
+                      alt="@shadcn"
+                      className="rounded-full cursor-pointer"
+                    />
                     <AvatarFallback>SC</AvatarFallback>
                   </Avatar>
                   <StoryProgress
@@ -214,9 +235,18 @@ const StoryCarousel = () => {
         {/* ======== NBA STORIES ======== */}
         <Dialog>
           <DialogTrigger>
-            <Avatar className="size-12">
-              <AvatarImage src="/images/02.webp" alt="@nba" />
-              <AvatarFallback>NB</AvatarFallback>
+            <Avatar className="size-24">
+              <span
+                aria-hidden="true"
+                className="inline-flex size-full rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-1"
+              >
+                <AvatarImage
+                  src="/images/02.webp"
+                  alt="@nba"
+                  className="rounded-full cursor-pointer"
+                />
+                <AvatarFallback>NB</AvatarFallback>
+              </span>
             </Avatar>
           </DialogTrigger>
           <DialogContent className="aspect-[12/16] w-auto h-[90vh] overflow-hidden p-0 rounded-md">
@@ -237,7 +267,11 @@ const StoryCarousel = () => {
               <DialogHeader className="px-4 py-6">
                 <div className="relative z-10 flex items-center gap-2">
                   <Avatar className="size-10">
-                    <AvatarImage src="/images/01.webp" alt="@nba" />
+                    <AvatarImage
+                      src="/images/01.webp"
+                      alt="@nba"
+                      className="rounded-full cursor-pointer"
+                    />
                     <AvatarFallback>NB</AvatarFallback>
                   </Avatar>
                   <StoryProgress

@@ -203,22 +203,15 @@ export const StoryControls = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, ...props }, ref) => {
     const { isPaused, isEnded, handleControl } = useStoryContext()
     return (
-      <span
-        aria-hidden="true"
-        className="inline-flex size-full rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-0.5"
+      <Button
+        onClick={handleControl}
+        size="icon"
+        {...props}
+        ref={ref}
+        className={className}
       >
-        <span className="inline-flex size-full rounded-full bg-white p-0.5">
-          <Button
-            onClick={handleControl}
-            size="icon"
-            {...props}
-            ref={ref}
-            className={className}
-          >
-            {isPaused ? isEnded ? <ReplyIcon /> : <PlayIcon /> : <PauseIcon />}
-          </Button>
-        </span>
-      </span>
+        {isPaused ? isEnded ? <ReplyIcon /> : <PlayIcon /> : <PauseIcon />}
+      </Button>
     )
   }
 )
