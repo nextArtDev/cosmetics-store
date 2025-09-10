@@ -18,6 +18,7 @@ import ClipPathCarousel from './components/hero/clip-path-carousel'
 import Stats from './components/infinite-slider/Stats'
 import StoryCarousel from '@/components/home/shared/StoryCarouse'
 import EmblaTestimonial from '@/components/home/testemonial/EmblaTestimonial'
+import VideoStoryCarousel from '@/components/home/video-stories/video-story-carousel'
 
 export async function generateMetadata(): Promise<Metadata> {
   // Fetch data for dynamic meta information
@@ -362,11 +363,12 @@ export default async function Home() {
       <section className="py-12">
         <WorkVideo />
       </section>
-      <section className="flex flex-col items-center gap-6 ">
+      <section className="w-full h-full flex flex-col items-center gap-6 ">
         <h2 className="text-xl md:text-3xl font-bold uppercase text-center  py-8">
           تعهدات ما
         </h2>
-        <Commitments />
+        {/* <Commitments /> */}
+        <VideoStoryCarousel />
       </section>
       <section className="flex flex-col w-full h-full gap-6  text-center py-12 ">
         <h2 className="text-xl md:text-3xl font-bold uppercase text-center py-8  ">

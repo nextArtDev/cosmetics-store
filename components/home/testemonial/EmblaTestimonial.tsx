@@ -80,6 +80,7 @@ export default function EmblaTestimonial({
                 > */}
                 <ClipPathMessage className="rotate-[15deg]">
                   <motion.div
+                    dir="rtl"
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -146,7 +147,6 @@ export default function EmblaTestimonial({
                       </div>
                     </motion.div>
                     <motion.div
-                      dir="rtl"
                       initial={{ opacity: 0, y: 5 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: 0.4 + index * 0.05 }}
