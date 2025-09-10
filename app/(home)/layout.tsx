@@ -8,7 +8,7 @@ export default function layout({
   children: React.ReactNode
 }>) {
   return (
-    <section className="relative w-full h-full ">
+    <section className="relative w-full h-full min-h-screen   ">
       <ViewTransitions>
         <Navbar />
 
