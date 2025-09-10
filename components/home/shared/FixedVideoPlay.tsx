@@ -1,7 +1,6 @@
 'use client'
 import React, { useRef, useEffect, ReactNode } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
-import VideoClipPath from './VideoClipPath'
 
 type SupportedEdgeUnit = 'px' | 'vw' | 'vh' | '%'
 type EdgeUnit = `${number}${SupportedEdgeUnit}`
@@ -57,32 +56,31 @@ export default function FixedVideoPlay({
   return (
     <section
       ref={sectionRef}
-      className={` relative flex items-center justify-center h-[500px] md:h-[700px] overflow-hidden  ${className}`}
+      className={` relative  flex items-center justify-center h-[800px] md:h-screen overflow-hidden  ${className}`}
     >
-      <div className="absolute inset-0 z-0">
-        {/* The motion.div wraps the video and applies the parallax effect */}
-        <VideoClipPath>
-          <motion.div
-            className="absolute inset-0 z-0"
-            style={{ y }} // Apply the vertical transform for parallax
-          >
-            <video
-              ref={videoRef}
-              src={videoUrl}
-              loop
-              muted={true}
-              playsInline
-              autoPlay
-              className="w-full h-full object-cover"
-              suppressHydrationWarning
-            />
-          </motion.div>
-        </VideoClipPath>
-        {/* This adds the dark overlay on top of the video */}
-        <div className={` absolute inset-0 z-10  ${overlayClassNames}`} />
-      </div>
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{ y }} // Apply the vertical transform for parallax
+      >
+        <figure
+          style={{ clipPath: 'url(#differentone23)' }}
+          className="relative w-[94%] mx-auto h-2/3 md:h-[700px] my-24 md:my-0"
+        >
+          <video
+            ref={videoRef}
+            src={videoUrl}
+            loop
+            muted={true}
+            playsInline
+            autoPlay
+            className="w-full h-full object-cover"
+            suppressHydrationWarning
+          />
+        </figure>
+      </motion.div>
+      {/* This adds the dark overlay on top of the video */}
+      <div className={` absolute inset-0 z-10  ${overlayClassNames}`} />
 
-      {/* The content is placed on top with a higher z-index. */}
       <div className="relative z-20">{children}</div>
     </section>
   )
