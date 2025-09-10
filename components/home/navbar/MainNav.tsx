@@ -94,7 +94,7 @@ export default function MainNav({
                   <Logo />
                 </div> */}
 
-                <div className="hidden lg:items-center h-full lg:flex">
+                <div className="hidden lg:items-center h-full lg:flex z-40">
                   <DesktopNav navigation={navigation} session={session} />
                 </div>
               </div>

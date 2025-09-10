@@ -45,13 +45,21 @@ const logos = [
   { id: '17', imageSrc: ScottLogo, name: 'ScottLogo' },
   { id: '18', imageSrc: Amway, name: 'Amway' },
 ]
+const firstRow = logos.slice(0, 5)
+const secondRow = logos.slice(5, 11)
+const thirdRow = logos.slice(11)
+
 const Stats = () => {
   return (
     <div className=" flex flex-col gap-4 items-center justify-center overflow-x-hidden">
       <h1 className="sr-only">برند محصولات</h1>
+
       <InfiniteSlider reverse>
-        {logos.slice(0, 5).map((logo) => (
-          <figure key={logo.id} className={cn('relative w-fit h-[150px')}>
+        {[...firstRow, ...firstRow].map((logo, index) => (
+          <figure
+            key={`${logo.id}-${index}`}
+            className={cn('relative w-fit h-[150px]')}
+          >
             <Image
               width={logo.imageSrc.width / 3}
               height={120}
@@ -62,9 +70,13 @@ const Stats = () => {
           </figure>
         ))}
       </InfiniteSlider>
+
       <InfiniteSlider>
-        {logos.slice(5, 11).map((logo) => (
-          <figure key={logo.id} className={cn('relative w-fit h-[150px')}>
+        {[...secondRow, ...secondRow].map((logo, index) => (
+          <figure
+            key={`${logo.id}-${index}`}
+            className={cn('relative w-fit h-[150px]')}
+          >
             <Image
               width={logo.imageSrc.width / 3}
               height={120}
@@ -75,12 +87,16 @@ const Stats = () => {
           </figure>
         ))}
       </InfiniteSlider>
+
       <InfiniteSlider reverse>
-        {logos.slice(11).map((logo) => (
-          <figure key={logo.id} className={cn('relative w-fit h-[150px')}>
+        {[...thirdRow, ...thirdRow].map((logo, index) => (
+          <figure
+            key={`${logo.id}-${index}`}
+            className={cn('relative w-fit h-[110px]')}
+          >
             <Image
-              width={logo.imageSrc.width / 3}
-              height={120}
+              width={logo.imageSrc.width / 4}
+              height={100}
               src={logo.imageSrc.src}
               alt={`${logo.name} brand`}
               className=""

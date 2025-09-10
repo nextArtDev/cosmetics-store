@@ -1,6 +1,5 @@
 import DiscoverMoreCarousel from '@/components/home/discover-more/DiscoverMoreCarousel'
-// import Hero from '@/components/home/hero/hero'
-import Commitments from '@/components/home/shared/Commitments'
+
 import StoreStatement from '@/components/home/shared/StoreStatement'
 import WorkVideo from '@/components/home/shared/WorkVideo'
 
@@ -37,19 +36,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const description = ` ${categoryNames.join(
     ', '
-  )}کارگاه ساخت کیف و محصولات چرم طبیعی. ${
+  )}کارگاه ساخت کیف و محصولات لوازم آرایشی باکیفیت. ${
     avgRating ? `امتیاز ${avgRating}/5 بوسیله ${reviews?.length} خریدار.` : ''
   } ارسال سریع، کیفیت بالای محصولات و سرویس‌دهی عالی به خریداران.`
 
   return {
-    title: 'فروشگاه لوازم آرایشی - چرم طبیعی دست‌ساز',
+    title: 'فروشگاه لوازم آرایشی - لوازم آرایشی باکیفیت دست‌ساز',
     description,
     keywords: [
       ...categoryNames?.map((name) => name.toLowerCase()),
-      'چرم طبیعی',
-      'کیف چرم طبیعی زنانه',
+      'لوازم آرایشی باکیفیت',
+      'کیف لوازم آرایشی باکیفیت زنانه',
       'کیف چرمی زنانه',
-      'چرم طبیعی تضمین شده',
+      'لوازم آرایشی باکیفیت تضمین شده',
       'فروشگاه آنلاین',
       'کارگاه چرم دست‌دوز',
       'فروشگاه چرم',
@@ -58,7 +57,7 @@ export async function generateMetadata(): Promise<Metadata> {
     // Open Graph for social sharing
     openGraph: {
       type: 'website',
-      title: 'فروشگاه لوازم آرایشی - چرم طبیعی دست‌ساز',
+      title: 'فروشگاه لوازم آرایشی - لوازم آرایشی باکیفیت دست‌ساز',
       description,
       url: process.env.NEXT_PUBLIC_SITE_URL,
       siteName: 'فروشگاه لوازم آرایشی',
@@ -67,7 +66,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: '/hero-image.webp', // Your home page OG image
           width: 1200,
           height: 630,
-          alt: 'فروشگاه لوازم آرایشی - چرم طبیعی دست‌ساز',
+          alt: 'فروشگاه لوازم آرایشی - لوازم آرایشی باکیفیت دست‌ساز',
         },
       ],
       locale: 'en_US',
@@ -76,7 +75,7 @@ export async function generateMetadata(): Promise<Metadata> {
     // Twitter Card
     twitter: {
       card: 'summary_large_image',
-      title: 'فروشگاه لوازم آرایشی - چرم طبیعی دست‌ساز',
+      title: 'فروشگاه لوازم آرایشی - لوازم آرایشی باکیفیت دست‌ساز',
       description,
       images: ['/twitter-home.jpg'],
       creator: '@yourstorehandle',
@@ -396,11 +395,3 @@ export default async function Home() {
     </div>
   )
 }
-
-//  {
-//     text: 'MVPBlocks has completely changed the way I build UIs. Copy-paste, done. No more design stress.',
-//     imageSrc: 'https://i.pravatar.cc',
-//     name: 'Arjun Mehta',
-//     username: '@arjdev',
-//     role: 'Frontend Developer',
-//   },

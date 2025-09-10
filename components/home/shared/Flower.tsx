@@ -1799,7 +1799,7 @@ export const StyledFlower = () => {
       `}</style>
 
       <section className="relative w-full h-full">
-        <div className="  w-full mx-auto md:w-3/4 lg:w-1/2">
+        <div className="  w-full mx-auto  ">
           <FlowerAnimation />
           {/* <div className="absolute inset-0">
             <figure className="relative w-52 h-52 rounded-full">
@@ -1815,9 +1815,9 @@ export const StyledFlower = () => {
         <div className="sticky inset-0  flex flex-col items-center justify-center  gap-4 ">
           <RevealText
             // text="Effortless Elegance"
-            text="آغاز داستان ما"
+            text="فروشگاه لوازم آرایشی"
             id="store-statements"
-            className="text-xl md:text-3xl font-bold pt-6"
+            className="text-2xl md:text-5xl font-bold pt-6 bg-gradient-to-r from-[#e4004b] to-[#ff64b4] via-[#35fa56] bg-clip-text text-transparent"
             staggerAmount={0.2}
             duration={0.8}
           />
@@ -1825,15 +1825,8 @@ export const StyledFlower = () => {
             className=" translate-y-8 "
             vars={{ delay: 0.6, duration: 0.6 }}
           >
-            <p className="text-center text-pretty md:text-lg">
-              {/* Since 1898, we have been dreaming up, designing and crafting premium and
-            essential bags and accessories that have stood the test of the years,
-            with their truly timeless design. */}
-              کارگاه کوچک ما، جایی است که رویاهای چرمی به واقعیت می‌پیوندند. ما
-              با اشتیاقی وافر و چشمداشت به فردایی درخشان، کار خود را با طراحی و
-              ساخت کیف‌ها و اکسسوری‌ها آغاز کرده‌ایم. بر این باوریم که طراحی
-              بی‌زمان و کیفیت استثنایی، هسته اصلی خلق محصولاتی هستند که قرار است
-              برای سال‌ها همراه همیشگی شما باشند.
+            <p className="font-semibold text-center text-pretty text-lg md:textxl">
+              ارائه بهترین لوازم آرایشی با بالاترین کیفیت و مناسبترین قیمت
             </p>
           </FadeIn>
         </div>

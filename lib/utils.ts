@@ -282,7 +282,7 @@ export async function generateSearchMetadata(params: {
     description = 'جست‌وجوی محصولات کامل فروشگاه'
     // 'Discover our complete product collection. Filter by category, price, color, and size to find exactly what you need.'
     keywords = [
-      'چرم طبیعی',
+      'لوازم آرایشی باکیفیت',
       'کیف چرمی',
       'خرید آنلاین',
       'فروشگاه چرم',

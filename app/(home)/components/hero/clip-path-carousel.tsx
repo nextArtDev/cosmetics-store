@@ -112,7 +112,7 @@ const ClipPathCarousel: FC<ClipPathCarouselProps> = ({ product }) => {
           <div className="absolute w-full h-fit right-2 top-0.5  ">
             <Socials />
           </div>
-          <div className="absolute w-[44%] h-[200px] right-2 top-[62%] z-20 ">
+          <div className="absolute w-[44%] h-[200px] right-2 top-[62%] z-[1] ">
             <SmallCard />
           </div>
           <div className="absolute w-full h-fit  top-2 -left-[81%] ">

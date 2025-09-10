@@ -130,7 +130,7 @@ export default function StatsCarouselcount({
 
   return (
     <section
-      className={`py-20 px-4 w-full max-w-md mx-auto text-center relative h-fit z-[40] ${className}`}
+      className={`py-20 px-4 w-full max-w-md mx-auto text-center relative h-fit z-[2] ${className}`}
     >
       {/* <h2 className="text-lg font-bold text-black dark:text-white mb-12">
         {title ?? 'CREATE STUNNING INTERFACES WITH SCROLLX UI COMPONENTS'}

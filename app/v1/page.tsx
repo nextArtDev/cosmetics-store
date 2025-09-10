@@ -1,7 +1,5 @@
 // import DiscoverMoreCarousel from '@/components/home/discover-more/DiscoverMoreCarousel'
 
-import TestimonialCarousel from '@/components/home/testemonial/Testemonial'
-
 import // getCategoriesWithStats,
 // getHomepageProducts,
 //   getSubCategories,
@@ -14,6 +12,7 @@ import FixedVideoPlay from './components/FixedMotionVideo'
 // import SlideTop from './components/SlideTo'
 import SideUp from './components/SideUp'
 import HeroLeather from './components/HeroLeather'
+// import EmblaTestimonial from '@/components/home/testemonial/EmblaTestimonial'
 
 // const bestSellersItems = [
 //   {
@@ -316,7 +315,7 @@ export default async function Home() {
           <SideUp />
         </div>
       </section>
-      <TestimonialCarousel />
+      {/* <EmblaTestimonial /> */}
 
       {/* <Link
         href={'/sign-in'}

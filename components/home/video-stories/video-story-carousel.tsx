@@ -6,7 +6,7 @@ import {
   StoriesContent,
   Story,
   StoryAuthor,
-  StoryAuthorImage,
+  // StoryAuthorImage,
   StoryAuthorName,
   StoryOverlay,
   StoryVideo,

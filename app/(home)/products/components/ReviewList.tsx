@@ -1,9 +1,9 @@
 import { ProductReview } from '@/lib/types/home'
 
-import TestimonialCarousel from '@/components/home/testemonial/Testemonial'
 import { Review } from '@/lib/generated/prisma'
 import Link from 'next/link'
 import ReviewForm from './ReviewForm'
+import EmblaTestimonial from '@/components/home/testemonial/EmblaTestimonial'
 
 type Props = {
   reviews: ProductReview[]
@@ -40,7 +40,7 @@ const ReviewList = ({
       )}
       <div className="flex flex-col gap-3">
         {!!reviews.length && (
-          <TestimonialCarousel
+          <EmblaTestimonial
             testimonials={reviews.map((review) => {
               const { title, description, user, createdAt, rating } = review
               return {

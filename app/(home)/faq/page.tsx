@@ -1,7 +1,7 @@
 'use client'
 // import { PhoneCall } from 'lucide-react'
 // import { Badge } from '@/components/ui/badge'
-import { Spotlight } from '../about-us/components/spotlight'
+// import { Spotlight } from '../about-us/components/spotlight'
 import FAQ from './components/FAQ'
 // import { Button } from '@/components/ui/button'
 
@@ -10,13 +10,13 @@ const faqs = [
     id: '1',
     question: ' چرم مورد استفاده شما از چه نوعی است و منشأ آن کجاست؟',
     answer:
-      'تمامی محصولات ما از چرم طبیعی گاو با بالاترین کیفیت و منشأ ایرانی (دباغی‌های معتبر اصفهان و تبریز) تهیه می‌شود. ما از چرم‌های مصنوعی (پلاستیکی) استفاده نمی‌کنیم.',
+      'تمامی محصولات ما از لوازم آرایشی باکیفیت گاو با بالاترین کیفیت و منشأ ایرانی (دباغی‌های معتبر اصفهان و تبریز) تهیه می‌شود. ما از چرم‌های مصنوعی (پلاستیکی) استفاده نمی‌کنیم.',
   },
   {
     id: '2',
     question: 'چگونه از طبیعی و اصل بودن چرم مطمئن شوم؟',
     answer:
-      'چرم طبیعی دارای رگه‌ها، بافت و بوئی منحصر به فرد است که در چرم مصنوعی وجود ندارد. با گذشت زمان و استفاده، چرم طبیعی نرم‌تر و زیباتر می‌شود و پاتینا (جلای کهنه‌گی) می‌گیرد.',
+      'لوازم آرایشی باکیفیت دارای رگه‌ها، بافت و بوئی منحصر به فرد است که در چرم مصنوعی وجود ندارد. با گذشت زمان و استفاده، لوازم آرایشی باکیفیت نرم‌تر و زیباتر می‌شود و پاتینا (جلای کهنه‌گی) می‌گیرد.',
   },
   {
     id: '3',
@@ -45,12 +45,12 @@ const faqs = [
 ]
 const FaqPage = () => {
   return (
-    <section className="relative w-full overflow-hidden py-16">
-      <Spotlight
+    <section className="relative w-full overflow-hidden pt-28 ">
+      {/* <Spotlight
         gradientFirst="radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(336, 100%, 50%, 0.08) 0, hsla(341, 100%, 55%, 0.04) 50%, hsla(336, 100%, 45%, 0) 80%)"
         gradientSecond="radial-gradient(50% 50% at 50% 50%, hsla(333, 100%, 85%, 0.08) 0, hsla(335, 100%, 55%, 0.04) 80%, transparent 100%)"
         gradientThird="radial-gradient(50% 50% at 50% 50%, hsla(332, 100%, 85%, 0.06) 0, hsla(327, 100%, 85%, 0.06) 80%, transparent 100%)"
-      />
+      /> */}
       <div className="bg-primary/5 absolute top-20 -left-20 h-64 w-64 rounded-full blur-3xl" />
       <div className="bg-primary/5 absolute -right-20 bottom-20 h-64 w-64 rounded-full blur-3xl" />
       <FAQ faqs={faqs} />
