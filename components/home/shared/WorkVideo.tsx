@@ -35,9 +35,12 @@ const WorkVideo = () => {
         </FadeIn>
       </div>
       <FixedVideoPlay
-        className="w-full"
-        videoUrl="/videos/Bags And Small Leather Goods For Women - Le Tanneur.webm"
+        className="w-full hidden lg:block py-24"
+        videoUrl="/videos/v1.mp4"
       >
+        {' '}
+      </FixedVideoPlay>
+      <FixedVideoPlay className="w-full lg:hidden" videoUrl="/videos/v2.mp4">
         {' '}
       </FixedVideoPlay>
     </section>

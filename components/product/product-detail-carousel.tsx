@@ -41,7 +41,7 @@ const ProductDetailCarousel = ({ images }: Props) => {
             delay: 3000,
           }),
         ]}
-        orientation="vertical"
+        // orientation="vertical"
         className="relative max-w-xs my-14 mx-auto"
       >
         <CarouselContent className="  -mt-1 h-[384px] aspect-square mx-auto ">

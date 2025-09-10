@@ -1,6 +1,7 @@
 'use client'
 import React, { useRef, useEffect, ReactNode } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import VideoClipPath from './VideoClipPath'
 
 type SupportedEdgeUnit = 'px' | 'vw' | 'vh' | '%'
 type EdgeUnit = `${number}${SupportedEdgeUnit}`
@@ -16,7 +17,7 @@ export default function FixedVideoPlay({
   children,
   offset = ['start end', 'end start'],
   transform = ['-20%', '20%'],
-  overlayClassNames = 'bg-black/30',
+  overlayClassNames = 'transparent',
   className,
 }: {
   videoUrl: string
@@ -60,21 +61,23 @@ export default function FixedVideoPlay({
     >
       <div className="absolute inset-0 z-0">
         {/* The motion.div wraps the video and applies the parallax effect */}
-        <motion.div
-          className="absolute inset-0 z-0"
-          style={{ y }} // Apply the vertical transform for parallax
-        >
-          <video
-            ref={videoRef}
-            src={videoUrl}
-            loop
-            muted={true}
-            playsInline
-            autoPlay
-            className="w-full h-full object-cover"
-            suppressHydrationWarning
-          />
-        </motion.div>
+        <VideoClipPath>
+          <motion.div
+            className="absolute inset-0 z-0"
+            style={{ y }} // Apply the vertical transform for parallax
+          >
+            <video
+              ref={videoRef}
+              src={videoUrl}
+              loop
+              muted={true}
+              playsInline
+              autoPlay
+              className="w-full h-full object-cover"
+              suppressHydrationWarning
+            />
+          </motion.div>
+        </VideoClipPath>
         {/* This adds the dark overlay on top of the video */}
         <div className={` absolute inset-0 z-10  ${overlayClassNames}`} />
       </div>
