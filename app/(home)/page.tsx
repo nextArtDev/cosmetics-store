@@ -3,7 +3,7 @@ import DiscoverMoreCarousel from '@/components/home/discover-more/DiscoverMoreCa
 import Commitments from '@/components/home/shared/Commitments'
 import StoreStatement from '@/components/home/shared/StoreStatement'
 import WorkVideo from '@/components/home/shared/WorkVideo'
-import TestimonialCarousel from '@/components/home/testemonial/Testemonial'
+
 import MainPageCarousel from '@/components/product/main-page-carousel'
 
 import {
@@ -17,6 +17,7 @@ import { Metadata } from 'next'
 import ClipPathCarousel from './components/hero/clip-path-carousel'
 import Stats from './components/infinite-slider/Stats'
 import StoryCarousel from '@/components/home/shared/StoryCarouse'
+import EmblaTestimonial from '@/components/home/testemonial/EmblaTestimonial'
 
 export async function generateMetadata(): Promise<Metadata> {
   // Fetch data for dynamic meta information
@@ -374,20 +375,30 @@ export default async function Home() {
         <DiscoverMoreCarousel subCategories={subCategories} />
       </section>
 
-      {!!reviews && (
-        <TestimonialCarousel
-          testimonials={reviews?.map((review) => {
-            const { title, description, user, createdAt, rating } = review
-            return {
-              title,
-              description,
-              user: user.name!,
-              createdAt,
-              rating,
-            }
-          })}
-        />
-      )}
+      <section className="w-full overflow-hidden">
+        {!!reviews && (
+          <EmblaTestimonial
+            testimonials={reviews?.map((review) => {
+              const { title, description, user, createdAt, rating } = review
+              return {
+                title,
+                description,
+                user: user.name!,
+                createdAt,
+                rating,
+              }
+            })}
+          />
+        )}
+      </section>
     </div>
   )
 }
+
+//  {
+//     text: 'MVPBlocks has completely changed the way I build UIs. Copy-paste, done. No more design stress.',
+//     imageSrc: 'https://i.pravatar.cc',
+//     name: 'Arjun Mehta',
+//     username: '@arjdev',
+//     role: 'Frontend Developer',
+//   },
