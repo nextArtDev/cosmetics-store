@@ -11,7 +11,7 @@ import {
   ProductSize,
   RelatedProduct,
 } from '@/lib/types/home'
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 import ReviewList from './ReviewList'
 import { Review } from '@/lib/generated/prisma'
 import { SingleStarRating } from '@/components/home/testemonial/SingleStartRating'
@@ -30,33 +30,37 @@ type ProductPageProp = {
   reviews: ProductReview[]
   productAverageRating: { rating: number; count: number } | null
   userReview: Review | null
-  sizeId: string
+  selectedSizeId: string
+  selectedColorId: string
   relatedProducts: RelatedProduct[] | null
 }
 const ProductPage: FC<ProductPageProp> = ({
   data,
+  userId,
   reviews,
   productAverageRating,
-
-  userId,
   userReview,
-  sizeId,
   relatedProducts,
+
+  selectedColorId,
+  selectedSizeId,
 }) => {
   // console.log({ reviews, numReviews })
   const {
     description,
     sku,
     images,
-    variantImages,
-    sizes,
-    colors,
+    // variantImages,
+    // sizes,
+    // colors,
+    variants,
+
     brand,
     // subCategory,
     id,
     name,
     slug,
-    weight,
+    // weight,
     shippingFeeMethod,
     questions,
     specs,
@@ -89,7 +93,31 @@ const ProductPage: FC<ProductPageProp> = ({
   //   return () => refresh()
   // }, [sizeId])
   // updatedSizeId = searchParams.get('sizeId')
-  const currentSize = sizes.find((s) => sizeId === s.id)
+  const currentVariant = variants.find(
+    (v) => v.size?.id === selectedSizeId && v.color?.id === selectedColorId
+  )
+
+  const uniqueSizes = useMemo(() => {
+    const seen = new Set()
+    return variants
+      .map((v) => v.size)
+      .filter((size) => {
+        if (!size || seen.has(size.id)) return false
+        seen.add(size.id)
+        return true
+      })
+  }, [variants])
+
+  const uniqueColors = useMemo(() => {
+    const seen = new Set()
+    return variants
+      .map((v) => v.color)
+      .filter((color) => {
+        if (!color || seen.has(color.id)) return false
+        seen.add(color.id)
+        return true
+      })
+  }, [variants])
 
   return (
     <section className="relative pb-24 w-full h-full">
@@ -107,7 +135,14 @@ const ProductPage: FC<ProductPageProp> = ({
       />
       <div className="max-w-2xl px-4 mx-auto  flex flex-col gap-4">
         <article className=" ">
-          <ProductDetailCarousel images={[...images, ...variantImages]} />
+          <ProductDetailCarousel
+            images={[
+              ...images,
+              ...(variants?.flatMap(
+                (vr) => vr?.images?.map((img) => ({ url: img.url })) ?? []
+              ) ?? []),
+            ]}
+          />
         </article>
 
         {/* <ProductDetails /> */}
@@ -131,51 +166,80 @@ const ProductPage: FC<ProductPageProp> = ({
 
           <Separator />
           <article className="flex items-center justify-evenly">
+            {/* === COLOR SELECTION === */}
             <div className="flex-1 flex flex-col gap-2 items-start">
               <p className="text-sm font-semibold">رنگ</p>
               <div className="flex gap-1">
-                {colors.map((clr: ProductColor) => (
-                  <Button
-                    size={'icon'}
-                    key={clr.id}
-                    style={{ background: clr.name }}
-                    className={`rounded-none size-8 cursor-pointer`}
-                  />
-                ))}
-              </div>
-            </div>
-            <Separator orientation="vertical" className="self-center mx-2" />
-            <div className="flex-1 flex flex-col gap-2 items-start">
-              <p className="text-sm font-semibold">سایز</p>
-              <ul className="flex flex-wrap gap-1">
-                {sizes.map((size: ProductSize) => (
-                  <li key={size.id}>
+                {uniqueColors.map((color) => {
+                  if (!color) return null
+                  // Check if any variant with this color is in stock
+                  const isAvailable = variants.some(
+                    (v) => v.color?.id === color.id && v.quantity > 0
+                  )
+                  return (
                     <Link
-                      // href={`/products/${slug}/?sizeId=${size.id}`}
+                      key={color.id}
+                      // ✅ 3. THE CRITICAL CHANGE: Preserve the selectedSizeId
                       href={{
                         pathname: `/products/${slug}`,
-                        query: { sizeId: `${size.id}` },
+                        query: { size: selectedSizeId, color: color.id },
                       }}
                       replace
                       scroll={false}
                       className={cn(
-                        'rounded-sm  cursor-pointer',
-                        buttonVariants({
-                          variant: size.id === sizeId ? 'default' : 'outline',
-                        }),
-                        size.quantity <= 0 &&
+                        'rounded-full p-1 transition-all',
+                        selectedColorId === color.id
+                          ? 'ring-2 ring-offset-2 ring-blue-500'
+                          : 'ring-1 ring-gray-300',
+                        !isAvailable &&
                           'opacity-50 cursor-not-allowed pointer-events-none'
                       )}
                     >
-                      {size.size}
-                      {size.quantity <= 0 && (
-                        <span className="ml-1 text-xs text-red-500">
-                          ناموجود
-                        </span>
-                      )}
+                      <div
+                        className="size-8 rounded-full"
+                        style={{ backgroundColor: color.hex }}
+                      />
                     </Link>
-                  </li>
-                ))}
+                  )
+                })}
+              </div>
+            </div>
+            <Separator orientation="vertical" />
+            {/* === SIZE SELECTION === */}
+            <div className="flex-1 flex flex-col gap-2 items-start">
+              <p className="text-sm font-semibold">سایز</p>
+              <ul className="flex flex-wrap gap-1">
+                {uniqueSizes.map((size) => {
+                  if (!size) return null
+                  const isAvailable = variants.some(
+                    (v) => v.size?.id === size.id && v.quantity > 0
+                  )
+                  return (
+                    <li key={size.id}>
+                      <Link
+                        // ✅ 4. THE CRITICAL CHANGE: Preserve the selectedColorId
+                        href={{
+                          pathname: `/products/${slug}`,
+                          query: { size: size.id, color: selectedColorId },
+                        }}
+                        replace
+                        scroll={false}
+                        className={cn(
+                          buttonVariants({
+                            variant:
+                              selectedSizeId === size.id
+                                ? 'default'
+                                : 'outline',
+                          }),
+                          !isAvailable &&
+                            'opacity-50 cursor-not-allowed pointer-events-none'
+                        )}
+                      >
+                        {size.name}
+                      </Link>
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           </article>
@@ -192,40 +256,40 @@ const ProductPage: FC<ProductPageProp> = ({
           <span
             className={cn(
               'w-2 h-2 animate-pulse rounded-full',
-              currentSize && currentSize.quantity > 0
+              currentVariant && currentVariant.quantity > 0
                 ? 'bg-green-600'
                 : 'bg-red-600'
             )}
           ></span>
-          {currentSize && currentSize.quantity > 0 ? 'موجود' : 'اتمام موجودی'}
+          {currentVariant && currentVariant.quantity > 0
+            ? 'موجود'
+            : 'اتمام موجودی'}
           {/* Show remaining quantity */}
-          {currentSize && currentSize.quantity > 0 && (
+          {currentVariant && currentVariant.quantity > 0 && (
             <span className="text-xs text-gray-500">
-              ({currentSize.quantity} عدد باقی مانده)
+              ({currentVariant.quantity} عدد باقی مانده)
             </span>
           )}
         </span>
         <article className="sticky top-2">
-          {!!sizes.length && currentSize && currentSize.quantity > 0 && (
-            <AddToCardBtn
-              sizeId={sizeId}
-              weight={weight}
-              size={currentSize.size}
-              discount={currentSize.discount}
-              price={currentSize.price}
-              stockQuantity={currentSize.quantity}
-              productId={id}
-              slug={slug}
-              name={name}
-              qty={1}
-              shippingFeeMethod={shippingFeeMethod}
-              // stock={stock}
-              image={images.map((image) => image.url)[0]}
-            />
-          )}
+          {!!variants?.length &&
+            currentVariant &&
+            currentVariant.size?.name &&
+            currentVariant.quantity > 0 && (
+              <AddToCardBtn
+                product={{
+                  id,
+                  slug,
+                  name,
+                  image: images.map((img) => img?.url)[0],
+                  shippingFeeMethod,
+                }}
+                variant={currentVariant}
+              />
+            )}
         </article>
 
-        {currentSize && currentSize.quantity <= 0 && (
+        {currentVariant && currentVariant.quantity <= 0 && (
           <div className="bg-red-50 border border-red-200 rounded-md p-4 text-center">
             <p className="text-red-600 font-medium">این سایز موجود نیست</p>
             <p className="text-sm text-red-500 mt-1">
@@ -276,10 +340,12 @@ const ProductPage: FC<ProductPageProp> = ({
           <div className="w-full h-full flex  flex-col gap-4  ">
             <h1 className="font-semibold">ویژگی‌ها و ابعاد:</h1>
 
-            {currentSize && (
+            {currentVariant && currentVariant.size && (
               <ProductProperties
-                size={currentSize}
-                weight={weight ? weight : undefined}
+                size={currentVariant.size}
+                weight={
+                  currentVariant?.weight ? currentVariant.weight : undefined
+                }
                 specs={
                   !!specs.filter((s) => s.name.trim().length > 0).length
                     ? specs

@@ -32,7 +32,7 @@ export async function getHomepageProducts(limit: number = 12) {
         },
       },
       // Get minimum size info for price display
-      sizes: {
+      variants: {
         select: {
           price: true,
           discount: true,
@@ -98,7 +98,7 @@ export async function getBestSellers(limit: number = 8) {
           url: true,
         },
       },
-      sizes: {
+      variants: {
         select: {
           price: true,
           discount: true,
@@ -130,7 +130,7 @@ export async function getNewProducts(limit: number = 8) {
           url: true,
         },
       },
-      sizes: {
+      variants: {
         select: {
           price: true,
           discount: true,
@@ -269,7 +269,7 @@ export async function searchProducts({
   // Price filtering
   if (minPrice || maxPrice) {
     conditions.push({
-      sizes: {
+      variants: {
         some: {
           price: {
             ...(minPrice && { gte: minPrice }),
@@ -472,32 +472,38 @@ export async function getProductDetails(slug: string): Promise<ProductDetails> {
           // key: true,
         },
       },
-      variantImages: {
-        select: {
-          // id: true,
-          url: true,
-          // key: true,
-        },
-      },
-      sizes: {
+      variants: {
         select: {
           id: true,
-          size: true,
           price: true,
-          discount: true,
           quantity: true,
+          discount: true,
+          weight: true,
+          length: true,
           width: true,
           height: true,
-          length: true,
+
+          images: {
+            select: {
+              url: true,
+            },
+          },
+          color: {
+            select: {
+              id: true,
+              name: true,
+              hex: true,
+            },
+          },
+          size: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
         },
         orderBy: {
           price: 'asc',
-        },
-      },
-      colors: {
-        select: {
-          id: true,
-          name: true,
         },
       },
       specs: {
@@ -611,7 +617,7 @@ export async function getRelatedProducts(
           url: true,
         },
       },
-      sizes: {
+      variants: {
         select: {
           price: true,
           discount: true,

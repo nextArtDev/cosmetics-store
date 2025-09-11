@@ -14,27 +14,18 @@ export type BasicProductImage = {
 
 export type ProductSize = {
   id: string
-  size: string
-  price: number
-  discount: number
-  quantity: number
-  length: number
-  width: number
-  height: number
-}
-
-export type BasicProductSize = {
-  price: number
-  discount: number
+  name: string
 }
 
 export type ProductColor = {
   id: string
   name: string
+  hex: string
 }
 
 export type BasicProductColor = {
   name: string
+  hex: string
 }
 
 export type CategoryInfo = {
@@ -49,6 +40,25 @@ export type SubCategoryInfo = {
   url: string
 }
 
+export type VariantsWithSizeAndColor = {
+  id: string
+  // sku:string
+  price: number
+  quantity: number
+  discount: number
+  weight: number | null
+  length: number | null
+  width: number | null
+  height: number | null
+  images: ProductImage[] | null
+  size: ProductSize | null
+  color: ProductColor | null
+}
+export type VariantsBasics = {
+  price: number
+  discount: number
+}
+
 // 1. Homepage Products Type
 export type HomepageProduct = {
   id: string
@@ -61,7 +71,7 @@ export type HomepageProduct = {
   brand: string
   saleEndDate: string | null
   images: BasicProductImage[]
-  sizes: BasicProductSize[]
+  variants: { price: number; discount: number }[]
   category: CategoryInfo
   subCategory: SubCategoryInfo
 }
@@ -76,7 +86,7 @@ export type BestSellerProduct = {
   rating: number
   sales: number
   images: BasicProductImage[]
-  sizes: BasicProductSize[]
+  variants: VariantsWithSizeAndColor[]
 }
 
 export type BestSellersResult = BestSellerProduct[]
@@ -88,7 +98,7 @@ export type NewProduct = {
   slug: string
   rating: number
   images: BasicProductImage[]
-  sizes: BasicProductSize[]
+  variants: VariantsWithSizeAndColor[]
 }
 
 export type NewProductsResult = NewProduct[]
@@ -257,16 +267,15 @@ export type ProductDetails = {
   saleEndDate: string | null
   sku: string | null
   keywords: string
-  weight: number | null
+
   categoryId: string
   subCategoryId: string
   offerTagId: string | null
   createdAt: Date
   updatedAt: Date
   images: ProductImage[]
-  variantImages: ProductImage[]
-  sizes: ProductSize[]
-  colors: ProductColor[]
+  variants: VariantsWithSizeAndColor[]
+
   specs: ProductSpec[]
   questions: ProductQuestion[]
   reviews: ProductReview[]
@@ -283,7 +292,7 @@ export type RelatedProduct = {
   slug: string
   rating: number
   images: BasicProductImage[]
-  sizes: BasicProductSize[]
+  variants: VariantsBasics[]
 }
 
 export type RelatedProductsResult = RelatedProduct[]
@@ -437,16 +446,20 @@ export type ProductListProps<T extends AnyProductType> = {
 
 //Cart
 export type CartProductType = {
+  variantId: string
   productId: string
   slug: string
   name: string
   image: string
-  sizeId: string
+
   size: string
-  quantity: number
+  color: string
   price: number
   stock: number
   weight: number
+
+  quantity: number
+
   shippingMethod: string
   shippingFee: number
   extraShippingFee: number

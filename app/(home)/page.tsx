@@ -217,10 +217,10 @@ export default async function Home() {
               description: product.description,
               image: product.images?.[0]?.url,
               url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product.slug}`,
-              ...(product.sizes?.map((s) => s.price) && {
+              ...(product.variants?.map((s) => s.price) && {
                 offers: {
                   '@type': 'Offer',
-                  price: product.sizes?.map((s) => s.price)[0],
+                  price: product.variants?.map((s) => s.price)[0],
                   priceCurrency: 'USD',
                   availability: 'https://schema.org/InStock',
                 },
@@ -248,10 +248,10 @@ export default async function Home() {
               description: product.description,
               image: product.images?.[0]?.url,
               url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product.slug}`,
-              ...(product.sizes?.map((s) => s.price) && {
+              ...(product.variants?.map((s) => s.price) && {
                 offers: {
                   '@type': 'Offer',
-                  price: product.sizes?.map((s) => s.price)[0],
+                  price: product.variants?.map((s) => s.price)[0],
                   priceCurrency: 'USD',
                   availability: 'https://schema.org/InStock',
                 },

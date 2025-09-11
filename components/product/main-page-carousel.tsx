@@ -71,7 +71,7 @@ export default function MainPageCarousel({ items }: MainPageCarousel) {
                     <ProductClipPath
                       // Pass a unique ID for each product's clipPath
                       clipPathId={`clipPath-${item.id}`}
-                      discounted={!!item.sizes?.map((s) => s.discount)?.[0]}
+                      discounted={!!item.variants?.map((s) => s.discount)?.[0]}
                     >
                       <Image
                         unoptimized
@@ -85,9 +85,9 @@ export default function MainPageCarousel({ items }: MainPageCarousel) {
                       />
                     </ProductClipPath>
 
-                    {!!item.sizes && (
+                    {!!item.variants && (
                       <>
-                        {item.sizes.map((size, i) => (
+                        {item?.variants?.map((size, i) => (
                           <div key={i} className="flex items-center gap-0.5">
                             {!!size.discount && (
                               <p className="text-red-500 rounded-md absolute top-0 left-0.5 bg-orange-500/20 px-2.5 py-1.25 backdrop-blur-sm border border-l-orange-500">
