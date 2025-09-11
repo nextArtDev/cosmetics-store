@@ -194,43 +194,6 @@ export const ProductFormSchema = z.object({
     ])
     .optional(),
 
-  // .optional(),
-  // variantImages: z.union([
-  //   z.array(z.instanceof(File)),
-  //   z.array(z.string()),
-  //   z.array(z.object({ url: z.string() })),
-  // ]),
-  // colors: z
-  //   .object({ color: z.string() })
-  //   .array()
-  //   .min(1, 'حداقل یک رنگ انتخاب کنید.')
-  //   .refine((colors) => colors.every((c) => c.color.length > 0), {
-  //     message: 'همه فیلدهای رنگ را تکمیل کنید.',
-  //   })
-  //   .optional(),
-  // sizes: z
-  //   .object({
-  //     size: z.string(),
-  //     quantity: z
-  //       .number()
-  //       .min(1, { message: 'تعداد باید از صفر بزرگتر باشد.' }),
-  //     price: z
-  //       .number()
-  //       .min(1000, { message: 'قیمت باید از هزارتومان بیشتر باشد.' }),
-  //     discount: z.number().min(0).default(0).optional(),
-  //     length: z.number().min(1, { message: 'طول باید از صفر بزرگتر باشد.' }),
-  //     width: z.number().min(1, { message: 'عرض باید از صفر بزرگتر باشد.' }),
-  //     height: z.number().min(1, { message: 'ارتفاع باید از صفر بزرگتر باشد.' }),
-  //   })
-  //   .array()
-  //   .min(1, 'حداقل یک سایز را انتخاب کنید.')
-  //   .refine(
-  //     (sizes) =>
-  //       sizes.every((s) => s.size.length > 0 && s.price > 0 && s.quantity > 0),
-  //     {
-  //       message: 'همه فیلدها باید به درستی پر شوند.',
-  //     }
-  //   ),
   isSale: z.boolean().default(false).optional(),
   // saleEndDate: z.string().optional(),
   keywords: z

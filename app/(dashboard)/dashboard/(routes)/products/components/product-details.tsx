@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { FieldArrayWithId, useFieldArray, useForm } from 'react-hook-form'
+import { useFieldArray, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import * as z from 'zod'
 
@@ -49,7 +49,7 @@ import {
   Spec,
 } from '@/lib/generated/prisma'
 import { useQuery } from '@tanstack/react-query'
-import { NumberInput } from '@tremor/react'
+// import { NumberInput } from '@tremor/react'
 import { Loader2 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { FC, useTransition } from 'react'
@@ -233,22 +233,22 @@ const ProductDetails: FC<ProductFormProps> = ({
   console.log(errors)
   const handleSubmit = async (values: z.infer<typeof ProductFormSchema>) => {
     console.log({ values })
-    // startTransition(async () => {
-    //   try {
-    //     if (data) {
-    //       const res = await editProduct(values, data.id as string, path)
-    //       if (res?.errors) handleServerErrors(res.errors, form.setError)
-    //     } else {
-    //       const res = await createProduct(values, path)
-    //       if (res?.errors) handleServerErrors(res.errors, form.setError)
-    //     }
-    //   } catch (error) {
-    //     if (error instanceof Error && error.message.includes('NEXT_REDIRECT')) {
-    //       return
-    //     }
-    //     toast.error('مشکلی پیش آمده، لطفا دوباره امتحان کنید!')
-    //   }
-    // })
+    startTransition(async () => {
+      try {
+        if (data) {
+          const res = await editProduct(values, data.id as string, path)
+          if (res?.errors) handleServerErrors(res.errors, form.setError)
+        } else {
+          const res = await createProduct(values, path)
+          if (res?.errors) handleServerErrors(res.errors, form.setError)
+        }
+      } catch (error) {
+        if (error instanceof Error && error.message.includes('NEXT_REDIRECT')) {
+          return
+        }
+        toast.error('مشکلی پیش آمده، لطفا دوباره امتحان کنید!')
+      }
+    })
   }
   // const addMainVariantColor = (newColorValue: string) => {
   //   const exists = colorFields.some((cf) => cf.color === newColorValue)
@@ -379,7 +379,9 @@ const ProductDetails: FC<ProductFormProps> = ({
                 <ImageInput
                   name="variantImages"
                   label="عکس وریانتها"
-                  initialDataImages={data?.variants?.map((v) => v.images) ?? []}
+                  initialDataImages={
+                    data?.variants?.map((v) => v.images)[0] ?? []
+                  }
                   createVariantFromColor={createVariantFromColor}
                 />
                 {/* <div className="space-y-4">
