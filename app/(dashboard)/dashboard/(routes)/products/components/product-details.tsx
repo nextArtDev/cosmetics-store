@@ -41,6 +41,7 @@ import {
   Image,
   OfferTag,
   Product,
+  ProductVariant,
   Province,
   Question,
   ShippingFeeMethod,
@@ -89,8 +90,14 @@ interface ProductFormProps {
     } & {
       questions: Partial<Question>[] | null
     } & {
-      colors: Partial<Color>[] | null
-    } & { sizes: Partial<Size>[] | null } & { variantImages: Partial<Image>[] }
+      variants:
+        | (Partial<ProductVariant> & {
+            color: Partial<Color> | null
+          } & { size: Partial<Size> | null } & {
+            images: Partial<Image>[] | null
+          })[]
+        | null
+    }
   >
   categories: Partial<Category>[]
   offerTags: OfferTag[]
@@ -131,31 +138,37 @@ const ProductDetails: FC<ProductFormProps> = ({
       shippingFeeMethod: data?.shippingFeeMethod,
 
       sku: data?.sku ?? '',
-      colors: data?.colors?.map((clr) => ({ color: clr.name })) ?? [],
-      sizes: data?.sizes?.map(
-        ({ size, price, quantity, discount, height, width, length }) => ({
-          size,
-          price,
-          quantity,
-          discount,
-          height,
-          width,
-          length,
-        })
-      ) ?? [
+      // colors: data?.colors?.map((clr) => ({ color: clr.name })) ?? [],
+
+      variants: data?.variants?.map((v) => ({
+        size: v?.size?.name,
+        color: v?.color?.name,
+        colorHex: v?.color?.hex,
+        quantity: v.quantity,
+        price: v.price,
+        discount: v.discount || undefined,
+        weight: v.weight || 0,
+        length: v.length || 0,
+        width: v.width || 0,
+        height: v.height || 0,
+        sku: v.sku || '',
+      })) ?? [
         {
           size: '',
+          color: '',
+          colorHex: '#000000',
           quantity: 1,
           price: 1000,
           discount: 0,
+          weight: 0,
           length: 0,
           width: 0,
           height: 0,
+          sku: '',
         },
       ],
 
       isSale: data?.isSale || false,
-      weight: data?.weight ?? 0,
       saleEndDate: data?.saleEndDate
         ? new Date(data.saleEndDate)
         : new Date(new Date().setHours(0, 0, 0, 0)),
@@ -180,22 +193,30 @@ const ProductDetails: FC<ProductFormProps> = ({
     name: 'questions',
   })
 
-  const {
-    fields: colorFields,
-    append: appendColor,
-    remove: removeColor,
-  } = useFieldArray({
-    control: form.control,
-    name: 'colors',
-  })
+  // const {
+  //   fields: colorFields,
+  //   append: appendColor,
+  //   remove: removeColor,
+  // } = useFieldArray({
+  //   control: form.control,
+  //   name: 'colors',
+  // })
 
+  // const {
+  //   fields: sizeFields,
+  //   append: appendSize,
+  //   remove: removeSize,
+  // } = useFieldArray({
+  //   control: form.control,
+  //   name: 'sizes',
+  // })
   const {
-    fields: sizeFields,
-    append: appendSize,
-    remove: removeSize,
+    fields: variantFields,
+    append: appendVariant,
+    remove: removeVariant,
   } = useFieldArray({
     control: form.control,
-    name: 'sizes',
+    name: 'variants',
   })
 
   const { data: SubCategories, isPending: isPendingCategory } = useQuery({
@@ -209,32 +230,62 @@ const ProductDetails: FC<ProductFormProps> = ({
   // })
   // console.log({ citiesForFreeShipping })
   const errors = form.formState.errors
-
+  console.log(errors)
   const handleSubmit = async (values: z.infer<typeof ProductFormSchema>) => {
-    startTransition(async () => {
-      try {
-        if (data) {
-          const res = await editProduct(values, data.id as string, path)
-          if (res?.errors) handleServerErrors(res.errors, form.setError)
-        } else {
-          const res = await createProduct(values, path)
-          if (res?.errors) handleServerErrors(res.errors, form.setError)
-        }
-      } catch (error) {
-        if (error instanceof Error && error.message.includes('NEXT_REDIRECT')) {
-          return
-        }
-        toast.error('مشکلی پیش آمده، لطفا دوباره امتحان کنید!')
-      }
-    })
+    console.log({ values })
+    // startTransition(async () => {
+    //   try {
+    //     if (data) {
+    //       const res = await editProduct(values, data.id as string, path)
+    //       if (res?.errors) handleServerErrors(res.errors, form.setError)
+    //     } else {
+    //       const res = await createProduct(values, path)
+    //       if (res?.errors) handleServerErrors(res.errors, form.setError)
+    //     }
+    //   } catch (error) {
+    //     if (error instanceof Error && error.message.includes('NEXT_REDIRECT')) {
+    //       return
+    //     }
+    //     toast.error('مشکلی پیش آمده، لطفا دوباره امتحان کنید!')
+    //   }
+    // })
   }
-  const addMainVariantColor = (newColorValue: string) => {
-    const exists = colorFields.some((cf) => cf.color === newColorValue)
-    if (!exists && newColorValue && newColorValue.trim() !== '') {
-      appendColor({ color: newColorValue })
-    } else if (exists) {
-      toast.info(`Color ${newColorValue} already exists.`)
+  // const addMainVariantColor = (newColorValue: string) => {
+  //   const exists = colorFields.some((cf) => cf.color === newColorValue)
+  //   if (!exists && newColorValue && newColorValue.trim() !== '') {
+  //     appendColor({ color: newColorValue })
+  //   } else if (exists) {
+  //     toast.info(`Color ${newColorValue} already exists.`)
+  //   }
+  // }
+
+  const createVariantFromColor = (color: { name: string; hex: string }) => {
+    const existingVariants = form.getValues('variants')
+    const isDuplicate = existingVariants.some(
+      (variant) => variant.colorHex === color.hex
+    )
+
+    if (isDuplicate) {
+      toast.info(`A variant with the color ${color.name} already exists.`)
+      return
     }
+
+    appendVariant({
+      color: color.name,
+      colorHex: color.hex,
+      size: '',
+      quantity: 1,
+      price: 1000,
+      discount: 0,
+      weight: 0,
+      length: 0,
+      width: 0,
+      height: 0,
+      sku: '',
+    })
+    toast.success(
+      `ایجاد شد، لطفا جزئیات آنرا پر کنید. ${color.name} وریانت رنگ`
+    )
   }
 
   // const handleDeleteCityFreeShipping = (index: number) => {
@@ -328,26 +379,13 @@ const ProductDetails: FC<ProductFormProps> = ({
                 <ImageInput
                   name="variantImages"
                   label="عکس وریانتها"
-                  initialDataImages={data ? data?.variantImages : null}
-                  mainVariantColors={
-                    colorFields as unknown as FieldArrayWithId<
-                      any,
-                      'colors',
-                      'id'
-                    >[]
-                  }
-                  addMainVariantColor={addMainVariantColor}
+                  initialDataImages={data?.variants?.map((v) => v.images) ?? []}
+                  createVariantFromColor={createVariantFromColor}
                 />
-                <div className="space-y-4">
+                {/* <div className="space-y-4">
                   <ClickToAddInputsRHF
-                    fields={
-                      colorFields as unknown as FieldArrayWithId<
-                        any,
-                        'colors',
-                        'id'
-                      >[]
-                    }
-                    name="colors"
+                    fields={variantFields}
+                    name="variants"
                     control={form.control}
                     register={form.register}
                     setValue={form.setValue}
@@ -365,63 +403,68 @@ const ProductDetails: FC<ProductFormProps> = ({
                         (form.formState.errors.colors as any)?.root?.message}
                     </span>
                   )}
-                </div>
+                </div> */}
               </div>
 
-              <InputFieldset label="سایز، قیمت و تخفیف">
+              <InputFieldset label="انواع محصول (وریانت‌ها)" isMandatory>
                 <ClickToAddInputsRHF
-                  fields={
-                    sizeFields as unknown as FieldArrayWithId<
-                      any,
-                      'sizes',
-                      'id'
-                    >[]
-                  }
-                  name="sizes"
+                  fields={variantFields as any}
+                  name="variants"
                   control={form.control}
                   register={form.register}
                   setValue={form.setValue}
                   getValues={form.getValues}
                   onAppend={() =>
-                    appendSize({
+                    appendVariant({
                       size: '',
+                      color: '',
+                      colorHex: '#000000',
                       quantity: 1,
                       price: 1000,
                       discount: 0,
+                      weight: 0,
                       length: 0,
                       width: 0,
                       height: 0,
+                      sku: '',
                     })
                   }
-                  onRemove={removeSize}
+                  onRemove={removeVariant}
                   initialDetailSchema={{
                     size: '',
+                    color: '',
+                    colorHex: '#000000',
                     quantity: 1,
                     price: 1000,
                     discount: 0,
+                    weight: 0,
                     length: 0,
                     width: 0,
                     height: 0,
+                    sku: '',
                   }}
                   labels={{
                     size: 'سایز',
+                    color: 'نام رنگ',
+                    colorHex: 'کد رنگ',
                     quantity: 'تعداد',
                     price: 'قیمت',
                     discount: 'تخفیف',
-                    length: 'طول',
-                    width: 'عرض',
-                    height: 'ارتفاع',
+                    weight: 'وزن (kg)',
+                    length: 'طول (cm)',
+                    width: 'عرض (cm)',
+                    height: 'ارتفاع (cm)',
+                    sku: 'SKU',
                   }}
                   isMandatory
                 />
-                {form.formState.errors.sizes && (
+                {form.formState.errors.variants && (
                   <span className="text-sm font-medium text-destructive">
-                    {form.formState.errors.sizes.message ||
-                      (form.formState.errors.sizes as any)?.root?.message}
+                    {form.formState.errors.variants.message ||
+                      (form.formState.errors.variants as any)?.root?.message}
                   </span>
                 )}
               </InputFieldset>
-
               <InputFieldset label="دسته‌بندی" isMandatory>
                 <div className="flex gap-4">
                   <FormField
@@ -571,32 +614,6 @@ const ProductDetails: FC<ProductFormProps> = ({
                             value={field.value || ''}
                           />
                         </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="weight"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          وزن (kg) <span className="text-rose-500">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <NumberInput
-                            defaultValue={field.value}
-                            onValueChange={field.onChange}
-                            placeholder="وزن محصول"
-                            min={0.01}
-                            step={0.01}
-                            className="!shadow-none rounded-md !text-sm"
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          وزن برحسب کیلوگرم است و برای محاسبه دقیق هزینه پست
-                          الزامی است.
-                        </FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}

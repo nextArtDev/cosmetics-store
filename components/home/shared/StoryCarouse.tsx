@@ -67,7 +67,7 @@ const NBA_STORIES = [
 const StoryCarousel = () => {
   return (
     <section className="pt-20 pb-8 w-full place-content-center">
-      <ScrollArea className="w-full whitespace-nowrap">
+      <ScrollArea className="w-screen h-auto whitespace-nowrap ">
         <div className="flex gap-4 justify-center">
           {/* ======== FABRIZIO STORIES ======== */}
           <Dialog>

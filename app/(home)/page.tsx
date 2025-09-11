@@ -319,7 +319,7 @@ export default async function Home() {
         }}
       />
       <div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 -z-[1]"
         style={{
           background: `
         radial-gradient(ellipse 80% 60% at 70% 20%, rgba(229, 190, 181, 0.85), transparent 68%),

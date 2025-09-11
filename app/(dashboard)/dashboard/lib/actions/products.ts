@@ -123,7 +123,6 @@ export async function createProduct(
           : '',
         sku: result.data.sku ? result.data.sku : '',
         isSale: result.data.isSale,
-        weight: result.data.weight ? +result.data.weight : 0,
         saleEndDate: String(result.data.saleEndDate),
 
         // freeShipping:result.data.freeShippingCountriesIds?true:false,
