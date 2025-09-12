@@ -408,6 +408,7 @@ export interface DbCartItem {
   currentPrice: number
   isStockValid: boolean
   isPriceValid: boolean
+  color: string
   maxAvailableQuantity: number
 }
 
@@ -552,7 +553,7 @@ export async function getValidatedCart(): Promise<CartValidationResult> {
       validatedItems.push({
         id: item.id,
         productId: item.productId,
-        variantId: item.id,
+        variantId: item.variantId,
         productSlug: item.productSlug,
         sku: item.sku,
         name: item.name,
@@ -568,6 +569,7 @@ export async function getValidatedCart(): Promise<CartValidationResult> {
         isStockValid,
         isPriceValid,
         maxAvailableQuantity,
+        color: item.color,
       })
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

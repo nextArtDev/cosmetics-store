@@ -272,21 +272,27 @@ const ProductPage: FC<ProductPageProp> = ({
           )}
         </span>
         <article className="sticky top-2">
-          {!!variants?.length &&
-            currentVariant &&
-            currentVariant.size?.name &&
-            currentVariant.quantity > 0 && (
-              <AddToCardBtn
-                product={{
-                  id,
-                  slug,
-                  name,
-                  image: images.map((img) => img?.url)[0],
-                  shippingFeeMethod,
-                }}
-                variant={currentVariant}
-              />
-            )}
+          {currentVariant && currentVariant.size && currentVariant.color ? (
+            <AddToCardBtn
+              variant={currentVariant}
+              product={{
+                id: id,
+                slug: slug,
+                name: name,
+                image: (data.images[0] || data.variants[0]?.images)?.url,
+                shippingFeeMethod: shippingFeeMethod,
+              }}
+            />
+          ) : (
+            <div className="bg-orange-100 border border-orange-200 rounded-md p-4 text-center">
+              <p className="text-orange-700 font-medium">
+                این ترکیب رنگ و سایز موجود نیست!
+              </p>
+              <p className="text-sm text-orange-600 mt-1">
+                لطفا ترکیب دیگری از سایز و رنگ را انتخاب کنید.
+              </p>
+            </div>
+          )}
         </article>
 
         {currentVariant && currentVariant.quantity <= 0 && (

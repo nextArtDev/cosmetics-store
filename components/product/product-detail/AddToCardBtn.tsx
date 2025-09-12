@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { useCartStore } from '@/hooks/useCartStore'
 import useFromStore from '@/hooks/useFromStore'
-import { CartProductType } from '@/lib/types/home'
+import { CartProductType, ProductColor, ProductSize } from '@/lib/types/home'
 import { cn } from '@/lib/utils'
 import { Minus, Plus } from 'lucide-react'
 import React, { FC } from 'react'
@@ -18,8 +18,8 @@ type AddToCardBtnProps = {
   }
   variant: {
     id: string
-    size: { name: string }
-    color: { name: string; hex: string }
+    size: ProductSize
+    color: ProductColor
     price: number
     discount: number
     quantity: number

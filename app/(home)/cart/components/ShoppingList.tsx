@@ -117,19 +117,38 @@ const ShoppingList = ({ cartItems, mutable = false }: Props) => {
                   {!mutable && (
                     // <AddToCardBtn  item={product} />
                     <AddToCardBtn
-                      sizeId={item.sizeId}
-                      weight={item.weight}
-                      size={item.size}
-                      discount={item.price}
-                      price={item.price}
-                      stockQuantity={item.stock}
-                      productId={item.productId}
-                      slug={item.slug}
-                      name={item.name}
-                      qty={item.quantity}
-                      shippingFeeMethod={item.shippingMethod}
-                      // stock={stock}
-                      image={item.image}
+                      product={{
+                        id: item.productId,
+                        slug: item.slug,
+                        name: item.name,
+                        image: item.image,
+                        shippingFeeMethod: item.shippingMethod,
+                      }}
+                      variant={{
+                        id: item.variantId,
+                        size: item.size!,
+                        color: item.color!,
+                        price: item.price,
+                        // discount: item.discount,
+                        quantity: item.quantity,
+                        weight: item.weight,
+                      }}
+                      //  variant={item}
+                      //  product={
+
+                      //  }
+                      //   weight={item.weight}
+                      //   size={item.size}
+                      //   discount={item.price}
+                      //   price={item.price}
+                      //   stockQuantity={item.stock}
+                      //   productId={item.productId}
+                      //   slug={item.slug}
+                      //   name={item.name}
+                      //   qty={item.quantity}
+                      //   shippingFeeMethod={item.shippingMethod}
+                      //   // stock={stock}
+                      //   image={item.image}
                     />
                   )}
                 </div>
