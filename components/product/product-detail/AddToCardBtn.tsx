@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { useCartStore } from '@/hooks/useCartStore'
 import useFromStore from '@/hooks/useFromStore'
-import { CartProductType, ProductColor, ProductSize } from '@/lib/types/home'
+import { CartProductType } from '@/lib/types/home'
 import { cn } from '@/lib/utils'
 import { Minus, Plus } from 'lucide-react'
 import React, { FC } from 'react'
@@ -18,8 +18,8 @@ type AddToCardBtnProps = {
   }
   variant: {
     id: string
-    size: ProductSize
-    color: ProductColor
+    size: string
+    color: string
     price: number
     discount: number
     quantity: number
@@ -44,8 +44,8 @@ const AddToCardBtn: FC<AddToCardBtnProps> = ({ product, variant }) => {
       slug: product.slug,
       name: product.name,
       image: product.image,
-      size: variant.size.name,
-      color: variant.color.name,
+      size: variant.size,
+      color: variant.color,
       price:
         variant.discount > 0
           ? variant.price - variant.price * (variant.discount / 100)
@@ -59,7 +59,7 @@ const AddToCardBtn: FC<AddToCardBtnProps> = ({ product, variant }) => {
     }
     addToCart(itemToAdd)
     toast.success(
-      ` ${product.name} (${variant.size.name} / ${variant.color.name}) به کارت اضافه شد!`
+      ` ${product.name} (${variant.size} / ${variant.color}) به کارت اضافه شد!`
     )
   }
 
@@ -77,7 +77,9 @@ const AddToCardBtn: FC<AddToCardBtnProps> = ({ product, variant }) => {
   if (variant.quantity <= 0) {
     return (
       <div className="w-full p-4 bg-red-50 border border-red-200 rounded-sm text-center">
-        <p className="text-red-600 font-medium">این سایز موجود نیست</p>
+        <p className="text-red-600 font-medium">
+          این ترکیب رنگ و سایز موجود نیست!
+        </p>
       </div>
     )
   }

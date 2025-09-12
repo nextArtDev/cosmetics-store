@@ -2,15 +2,9 @@ import ProductDetailCarousel from '@/components/product/product-detail-carousel'
 import AddToCardBtn from '@/components/product/product-detail/AddToCardBtn'
 
 import ProductStatements from '@/components/product/product-detail/ProductStatemeents'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import {
-  ProductColor,
-  ProductDetails,
-  ProductReview,
-  ProductSize,
-  RelatedProduct,
-} from '@/lib/types/home'
+import { ProductDetails, ProductReview, RelatedProduct } from '@/lib/types/home'
 import { FC, useMemo } from 'react'
 import ReviewList from './ReviewList'
 import { Review } from '@/lib/generated/prisma'
@@ -274,7 +268,15 @@ const ProductPage: FC<ProductPageProp> = ({
         <article className="sticky top-2">
           {currentVariant && currentVariant.size && currentVariant.color ? (
             <AddToCardBtn
-              variant={currentVariant}
+              variant={{
+                id: currentVariant?.id,
+                size: currentVariant.size.name,
+                color: currentVariant.color.name,
+                price: currentVariant.price,
+                discount: currentVariant.discount,
+                quantity: currentVariant.quantity,
+                weight: currentVariant?.weight,
+              }}
               product={{
                 id: id,
                 slug: slug,
@@ -295,14 +297,16 @@ const ProductPage: FC<ProductPageProp> = ({
           )}
         </article>
 
-        {currentVariant && currentVariant.quantity <= 0 && (
+        {/* {currentVariant && currentVariant.quantity <= 0 && (
           <div className="bg-red-50 border border-red-200 rounded-md p-4 text-center">
-            <p className="text-red-600 font-medium">این سایز موجود نیست</p>
+            <p className="text-red-600 font-medium">
+              این ترکیب رنگ و سایز موجود نیست.
+            </p>
             <p className="text-sm text-red-500 mt-1">
-              لطفاً سایز دیگری انتخاب کنید
+              لطفاً ترکیب رنگ و سایز دیگری انتخاب کنید.
             </p>
           </div>
-        )}
+        )} */}
         <Link
           className={cn(
             buttonVariants({ variant: 'outline' }),
@@ -348,7 +352,7 @@ const ProductPage: FC<ProductPageProp> = ({
 
             {currentVariant && currentVariant.size && (
               <ProductProperties
-                size={currentVariant.size}
+                variant={currentVariant}
                 weight={
                   currentVariant?.weight ? currentVariant.weight : undefined
                 }

@@ -83,7 +83,7 @@ export async function createOrder() {
         // console.log({ orders })
       }
 
-      console.log({ order })
+      // console.log({ order })
       await tx.cart.delete({
         where: {
           userId,

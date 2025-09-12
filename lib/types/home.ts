@@ -51,8 +51,8 @@ export type VariantsWithSizeAndColor = {
   width: number | null
   height: number | null
   images: ProductImage[] | null
-  size: ProductSize | null
-  color: ProductColor | null
+  size: ProductSize
+  color: ProductColor
 }
 export type VariantsBasics = {
   price: number
@@ -180,9 +180,14 @@ export interface SearchProduct {
   isSale: boolean
   saleEndDate: string | null
   images: { url: string }[]
-  variantImages: { url: string }[]
-  sizes: { size: string; price: number; discount: number; quantity: number }[]
-  colors: { name: string }[]
+  variants: {
+    price: number
+    discount: number
+    quantity: number
+    size: ProductSize
+    images: ProductImage[]
+    color: ProductColor
+  }[]
   category?: { name: string; url: string }
   subCategory?: { name: string; url: string }
 }

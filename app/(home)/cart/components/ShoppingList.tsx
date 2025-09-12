@@ -126,10 +126,10 @@ const ShoppingList = ({ cartItems, mutable = false }: Props) => {
                       }}
                       variant={{
                         id: item.variantId,
-                        size: item.size!,
-                        color: item.color!,
+                        size: item.size,
+                        color: item.color,
                         price: item.price,
-                        // discount: item.discount,
+                        discount: 0,
                         quantity: item.quantity,
                         weight: item.weight,
                       }}

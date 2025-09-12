@@ -26,13 +26,6 @@ interface SearchPageProps {
   }>
 }
 
-// export async function generateMetadata({
-//   searchParams,
-// }: SearchPageProps): Promise<Metadata> {
-//   const params = await searchParams
-//   return generateSearchMetadata(params)
-// }
-
 export async function generateMetadata({
   searchParams,
 }: SearchPageProps): Promise<Metadata> {
@@ -66,28 +59,36 @@ async function SearchPageContent({ searchParams }: SearchPageProps) {
         numberOfItems: searchResults.products.length,
         itemListElement: searchResults.products
           .slice(0, 20)
-          .map((product, index) => ({
-            '@type': 'ListItem',
-            position: index + 1,
-            item: {
-              '@type': 'Product',
-              name: product.name,
-              description: product.brand,
-              image: product.images?.[0]?.url,
-              url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product.slug}`,
-              ...(product?.sizes?.[0]?.price && {
+          .map((product, index) => {
+            const firstVariant = product.variants[0]
+            const price = firstVariant
+              ? firstVariant.price -
+                firstVariant.price * (firstVariant.discount / 100)
+              : 0
+            const availability =
+              firstVariant && firstVariant.quantity > 0
+                ? 'https://schema.org/InStock'
+                : 'https://schema.org/OutOfStock'
+
+            return {
+              '@type': 'ListItem',
+              position: index + 1,
+              item: {
+                '@type': 'Product',
+                name: product.name,
+                description: product.brand,
+                image: product.images?.[0]?.url,
+                url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product.slug}`,
+
                 offers: {
                   '@type': 'Offer',
-                  price: product?.sizes?.[0]?.price,
-                  priceCurrency: 'IRRI',
-                  availability:
-                    product.sizes?.[0].quantity > 0
-                      ? 'https://schema.org/InStock'
-                      : 'https://schema.org/OutOfStock',
+                  price: price,
+                  priceCurrency: 'IRT', // Or your currency
+                  availability: availability,
                 },
-              }),
-            },
-          })),
+              },
+            }
+          }),
       },
     }
 

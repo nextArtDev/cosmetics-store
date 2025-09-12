@@ -147,13 +147,13 @@ const SubcategoryDetailsPage = async ({ params }: SubcategoryPageProps) => {
             // description: product.description,
             image: product.images?.[0]?.url,
             url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product.slug}`,
-            ...(product?.sizes?.[0]?.price && {
+            ...(product?.variants?.map((vr) => vr.price) && {
               offers: {
                 '@type': 'Offer',
-                price: product?.sizes?.[0]?.price,
+                price: product?.variants?.map((vr) => vr.price),
                 priceCurrency: 'IRRI',
                 availability:
-                  product.sizes?.[0].quantity > 0
+                  product.variants?.[0].quantity > 0
                     ? 'https://schema.org/InStock'
                     : 'https://schema.org/OutOfStock',
               },
@@ -194,7 +194,7 @@ const SubcategoryDetailsPage = async ({ params }: SubcategoryPageProps) => {
           __html: JSON.stringify(structuredData),
         }}
       />
-      <div className="relative w-full h-full flex flex-col items-center justify-center gap-8">
+      <div className="relative w-full h-full flex flex-col items-center justify-center gap-8 pt-24">
         <div
           className="absolute inset-0 -z-[1]"
           style={{
