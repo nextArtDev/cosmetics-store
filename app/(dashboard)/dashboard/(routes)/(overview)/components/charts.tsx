@@ -23,7 +23,7 @@ interface ChartsProps {
 
 const Charts = ({ data: { salesData } }: ChartsProps) => {
   // Debug: Log the data to see what we're getting
-  console.log('Chart data:', salesData)
+  // console.log('Chart data:', salesData)
 
   // Handle empty or invalid data
   if (!salesData || salesData.length === 0) {

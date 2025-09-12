@@ -18,8 +18,10 @@ import Stats from './components/infinite-slider/Stats'
 import StoryCarousel from '@/components/home/shared/StoryCarouse'
 import EmblaTestimonial from '@/components/home/testemonial/EmblaTestimonial'
 import VideoStoryCarousel from '@/components/home/video-stories/video-story-carousel'
+// import { seed } from '@/lib/home/actions/seed'
 
 export async function generateMetadata(): Promise<Metadata> {
+  // await seed()
   // Fetch data for dynamic meta information
   const [categories, reviews] = await Promise.all([
     getCategoriesWithStats(),

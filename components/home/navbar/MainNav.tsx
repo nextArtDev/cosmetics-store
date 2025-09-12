@@ -9,7 +9,7 @@ import DrawerCart from './DrawerCart'
 import MobileNav from './MobileNav'
 import UserSession from './UserSession'
 import SearchBar from './SearchBar'
-import Logo from './Logo'
+// import Logo from './Logo'
 import TopBanner from './TopBanner'
 import { TransitionLink } from '../shared/TransitionLink'
 

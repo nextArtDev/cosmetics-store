@@ -77,16 +77,6 @@ const ProductPage: FC<ProductPageProp> = ({
   // const searchParams = useSearchParams()
   // const params = new URLSearchParams(searchParams)
 
-  // let updatedSizeId = sizeId
-
-  // useEffect(() => {
-  //   params.set('sizeId', sizeId)
-  //   replace(`${pathname}?${params.toString()}`, {
-  //     scroll: false,
-  //   })
-  //   return () => refresh()
-  // }, [sizeId])
-  // updatedSizeId = searchParams.get('sizeId')
   const currentVariant = variants.find(
     (v) => v.size?.id === selectedSizeId && v.color?.id === selectedColorId
   )
@@ -112,7 +102,8 @@ const ProductPage: FC<ProductPageProp> = ({
         return true
       })
   }, [variants])
-
+  // console.log(variants?.flatMap((vr) => vr?.images))
+  // console.log(images)
   return (
     <section className="relative pb-24 w-full h-full">
       <div
@@ -129,12 +120,14 @@ const ProductPage: FC<ProductPageProp> = ({
       />
       <div className="max-w-2xl px-4 mx-auto  flex flex-col gap-4">
         <article className=" ">
+          {/* ...(product.variants?.flatMap((vr) => vr?.images.map((im) => im.url)) || */}
+
           <ProductDetailCarousel
             images={[
               ...images,
-              ...(variants?.flatMap(
-                (vr) => vr?.images?.map((img) => ({ url: img.url })) ?? []
-              ) ?? []),
+              ...variants?.flatMap(
+                (vr) => vr?.images?.flatMap((img) => img) ?? []
+              ),
             ]}
           />
         </article>

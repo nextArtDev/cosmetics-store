@@ -2,7 +2,6 @@
 import * as React from 'react'
 import {
   Carousel,
-  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -18,23 +17,12 @@ type Props = {
 }
 
 const ProductDetailCarousel = ({ images }: Props) => {
-  const [api, setApi] = React.useState<CarouselApi>()
-  // const [current, setCurrent] = React.useState(0)
-  // const [count, setCount] = React.useState(0)
-  React.useEffect(() => {
-    if (!api) {
-      return
-    }
-    // setCount(api.scrollSnapList().length)
-    // setCurrent(api.selectedScrollSnap() + 1)
-    api.on('select', () => {
-      // setCurrent(api.selectedScrollSnap() + 1)
-    })
-  }, [api])
+  // console.log({ images })
+
   return (
     <section className="relative  pt-28  mx-auto">
       <Carousel
-        setApi={setApi}
+        // setApi={setApi}
         opts={{ align: 'start', loop: true }}
         plugins={[
           Autoplay({
@@ -45,9 +33,9 @@ const ProductDetailCarousel = ({ images }: Props) => {
         className="relative max-w-xs my-14 mx-auto"
       >
         <CarouselContent className="  -mt-1 h-[384px] aspect-square mx-auto ">
-          {images?.map((image) => (
+          {images?.map((image, index) => (
             <CarouselItem
-              key={image.url}
+              key={`${image.url}-${index}`}
               className="flex items-center justify-center  w-full h-full   "
             >
               <figure className=" border-none relative h-full w-full bg-[#eceae8]  ">

@@ -230,9 +230,9 @@ const ProductDetails: FC<ProductFormProps> = ({
   // })
   // console.log({ citiesForFreeShipping })
   const errors = form.formState.errors
-  console.log(errors)
+  // console.log(errors)
   const handleSubmit = async (values: z.infer<typeof ProductFormSchema>) => {
-    console.log({ values })
+    // console.log({ values })
     startTransition(async () => {
       try {
         if (data) {

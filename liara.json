@@ -7,8 +7,6 @@
             "name":"logs",
             "mountTo":"logs"
         }
-    ],
- 
-    "account": "kharak"
+    ]
  
 }
