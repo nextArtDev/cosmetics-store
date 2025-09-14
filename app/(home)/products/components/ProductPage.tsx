@@ -120,15 +120,9 @@ const ProductPage: FC<ProductPageProp> = ({
       />
       <div className="max-w-2xl px-4 mx-auto  flex flex-col gap-4">
         <article className=" ">
-          {variants?.flatMap((vr) => vr?.images).length > 0 &&
-            images.length > 0 && (
-              <ProductDetailCarousel
-                images={[
-                  ...variants?.flatMap((vr) => vr?.images ?? []),
-                  ...images,
-                ]}
-              />
-            )}
+          <ProductDetailCarousel
+            images={[...variants?.flatMap((vr) => vr?.images ?? []), ...images]}
+          />
         </article>
 
         {/* <ProductDetails /> */}

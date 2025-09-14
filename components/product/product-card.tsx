@@ -49,7 +49,7 @@ const ProductCard = ({ product }: Props) => {
   const imageUrls = React.useMemo(
     () => [
       ...(product.images?.map((img) => img.url) || []),
-      ...(product.variants?.flatMap((vr) => vr?.images.map((im) => im.url)) ||
+      ...(product?.variants?.flatMap((vr) => vr?.images.map((im) => im.url)) ||
         []),
     ],
     [product.images, product.variants]
@@ -150,7 +150,7 @@ const ProductCard = ({ product }: Props) => {
           <p className="font-bold">{product.name}</p>
           <p> {product.variants?.flatMap((vr) => vr.price)[0]} تومان</p>
           <div className="flex gap-0.5 items-center">
-            {product.variants.flatMap((vr) => (
+            {product?.variants.flatMap((vr) => (
               <span
                 style={{ background: vr.color.hex }}
                 key={vr.color.name}
