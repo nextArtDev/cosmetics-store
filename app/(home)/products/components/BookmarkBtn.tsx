@@ -1,5 +1,10 @@
 'use client'
 import { Button } from '@/components/ui/button'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 import { toggleWishlistItem } from '@/lib/home/actions/user'
 import { cn } from '@/lib/utils'
 import { Bookmark } from 'lucide-react'
@@ -46,22 +51,31 @@ const BookmarkBtn: FC<BookmarkBtnProps> = ({ productId, isInWishList }) => {
 
   return (
     <form action={toggleWishedAction}>
-      <Button
-        size={'icon'}
-        variant={'ghost'}
-        disabled={pending || isPending}
-        type="submit"
-        asChild
-        // className=" w-14 h-14"
-      >
-        <Bookmark
-          size={20}
-          className={cn(
-            'cursor-pointer ',
-            optimisticIsInWishList ? 'fill-indigo-500' : 'fill-none'
-          )}
-        />
-      </Button>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            size={'icon'}
+            variant={'ghost'}
+            disabled={pending || isPending}
+            type="submit"
+
+            // className=" w-14 h-14"
+          >
+            <Bookmark
+              size={20}
+              className={cn(
+                'cursor-pointer ',
+                optimisticIsInWishList ? 'fill-indigo-600' : 'fill-none'
+              )}
+            />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>
+            {isInWishList ? 'حذف از علاقه‌مندی‌ها' : 'افزودن به علاقه‌مندی‌ها'}
+          </p>
+        </TooltipContent>
+      </Tooltip>
     </form>
   )
 }

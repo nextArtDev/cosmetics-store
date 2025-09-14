@@ -20,6 +20,7 @@ import Countdown from './count-down'
 import ProductProperties from './ProductProperties'
 
 import BookmarkBtn from './BookmarkBtn'
+import ViewNumbers from './view-numbers'
 
 type ProductPageProp = {
   data: NonNullable<ProductDetails>
@@ -67,7 +68,7 @@ const ProductPage: FC<ProductPageProp> = ({
     saleEndDate,
     // rating,
     // sales,
-    // views,
+    views,
     // isFeatured,
     // createdAt,
     // updatedAt,
@@ -144,13 +145,8 @@ const ProductPage: FC<ProductPageProp> = ({
                 </>
               )}
             </div>
-            {/* <Bookmark
-              onClick={async () => await toggleWishlistItem(id)}
-              className={cn(
-                'cursor-pointer',
-                isInWishList ? 'fill-indigo-500' : 'fill-none'
-              )}
-            /> */}
+
+            <ViewNumbers views={views} />
             <BookmarkBtn isInWishList={isInWishList} productId={id} />
           </div>
           <p className="text-sm font-semibold">{brand}</p>
