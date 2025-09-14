@@ -151,7 +151,7 @@ const SubcategoryDetailsPage = async ({ params }: SubcategoryPageProps) => {
               offers: {
                 '@type': 'Offer',
                 price: product?.variants?.map((vr) => vr.price),
-                priceCurrency: 'IRRI',
+                priceCurrency: 'IRI',
                 availability:
                   product.variants?.[0].quantity > 0
                     ? 'https://schema.org/InStock'

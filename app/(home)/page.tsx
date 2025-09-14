@@ -48,12 +48,12 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: [
       ...categoryNames?.map((name) => name.toLowerCase()),
       'لوازم آرایشی باکیفیت',
-      'کیف لوازم آرایشی باکیفیت زنانه',
-      'کیف چرمی زنانه',
+      '  لوازم آرایشی باکیفیت زنانه',
+
       'لوازم آرایشی باکیفیت تضمین شده',
       'فروشگاه آنلاین',
-      'کارگاه چرم دست‌دوز',
-      'فروشگاه چرم',
+
+      'فروشگاه لوازم آرایشی',
     ].join(', '),
 
     // Open Graph for social sharing

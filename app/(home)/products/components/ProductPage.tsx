@@ -1,3 +1,4 @@
+'use client'
 import ProductDetailCarousel from '@/components/product/product-detail-carousel'
 import AddToCardBtn from '@/components/product/product-detail/AddToCardBtn'
 
@@ -39,7 +40,6 @@ const ProductPage: FC<ProductPageProp> = ({
   selectedColorId,
   selectedSizeId,
 }) => {
-  // console.log({ reviews, numReviews })
   const {
     description,
     sku,
@@ -71,11 +71,6 @@ const ProductPage: FC<ProductPageProp> = ({
     // offerTag,
     // freeShipping,
   } = data
-  //   console.log(specs, name)
-  // const pathname = usePathname()
-  // const { replace, refresh } = useRouter()
-  // const searchParams = useSearchParams()
-  // const params = new URLSearchParams(searchParams)
 
   const currentVariant = variants.find(
     (v) => v.size?.id === selectedSizeId && v.color?.id === selectedColorId
@@ -120,16 +115,15 @@ const ProductPage: FC<ProductPageProp> = ({
       />
       <div className="max-w-2xl px-4 mx-auto  flex flex-col gap-4">
         <article className=" ">
-          {/* ...(product.variants?.flatMap((vr) => vr?.images.map((im) => im.url)) || */}
-
-          <ProductDetailCarousel
-            images={[
-              ...images,
-              ...variants?.flatMap(
-                (vr) => vr?.images?.flatMap((img) => img) ?? []
-              ),
-            ]}
-          />
+          {variants?.flatMap((vr) => vr?.images).length > 0 &&
+            images.length > 0 && (
+              <ProductDetailCarousel
+                images={[
+                  ...variants?.flatMap((vr) => vr?.images ?? []),
+                  ...images,
+                ]}
+              />
+            )}
         </article>
 
         {/* <ProductDetails /> */}
@@ -141,7 +135,7 @@ const ProductPage: FC<ProductPageProp> = ({
                 {productAverageRating.rating}
                 <p>{' از'}</p>
                 {productAverageRating.count}
-                <p>{' نظر'}</p>
+                <p>{' نفر'}</p>
               </>
             )}
           </div>
@@ -154,47 +148,10 @@ const ProductPage: FC<ProductPageProp> = ({
           <Separator />
           <article className="flex items-center justify-evenly">
             {/* === COLOR SELECTION === */}
-            <div className="flex-1 flex flex-col gap-2 items-start">
-              <p className="text-sm font-semibold">رنگ</p>
-              <div className="flex gap-1">
-                {uniqueColors.map((color) => {
-                  if (!color) return null
-                  // Check if any variant with this color is in stock
-                  const isAvailable = variants.some(
-                    (v) => v.color?.id === color.id && v.quantity > 0
-                  )
-                  return (
-                    <Link
-                      key={color.id}
-                      // ✅ 3. THE CRITICAL CHANGE: Preserve the selectedSizeId
-                      href={{
-                        pathname: `/products/${slug}`,
-                        query: { size: selectedSizeId, color: color.id },
-                      }}
-                      replace
-                      scroll={false}
-                      className={cn(
-                        'rounded-full p-1 transition-all',
-                        selectedColorId === color.id
-                          ? 'ring-2 ring-offset-2 ring-blue-500'
-                          : 'ring-1 ring-gray-300',
-                        !isAvailable &&
-                          'opacity-50 cursor-not-allowed pointer-events-none'
-                      )}
-                    >
-                      <div
-                        className="size-8 rounded-full"
-                        style={{ backgroundColor: color.hex }}
-                      />
-                    </Link>
-                  )
-                })}
-              </div>
-            </div>
-            <Separator orientation="vertical" />
-            {/* === SIZE SELECTION === */}
-            <div className="flex-1 flex flex-col gap-2 items-start">
-              <p className="text-sm font-semibold">سایز</p>
+            <div className=" flex-1 flex flex-col gap-2 items-start">
+              <p className="text-base font-semibold">
+                سایز: {currentVariant?.size.name}
+              </p>
               <ul className="flex flex-wrap gap-1">
                 {uniqueSizes.map((size) => {
                   if (!size) return null
@@ -204,7 +161,6 @@ const ProductPage: FC<ProductPageProp> = ({
                   return (
                     <li key={size.id}>
                       <Link
-                        // ✅ 4. THE CRITICAL CHANGE: Preserve the selectedColorId
                         href={{
                           pathname: `/products/${slug}`,
                           query: { size: size.id, color: selectedColorId },
@@ -214,9 +170,7 @@ const ProductPage: FC<ProductPageProp> = ({
                         className={cn(
                           buttonVariants({
                             variant:
-                              selectedSizeId === size.id
-                                ? 'default'
-                                : 'outline',
+                              selectedSizeId === size.id ? 'indigo' : 'link',
                           }),
                           !isAvailable &&
                             'opacity-50 cursor-not-allowed pointer-events-none'
@@ -228,6 +182,44 @@ const ProductPage: FC<ProductPageProp> = ({
                   )
                 })}
               </ul>
+            </div>
+            <Separator orientation="vertical" />
+            <div className="pr-2 flex-1 flex flex-col gap-2 items-start">
+              <p className="text-base font-semibold">
+                رنگ:{currentVariant?.color.name}
+              </p>
+              <div className="flex gap-1">
+                {uniqueColors.map((color) => {
+                  if (!color) return null
+                  const isAvailable = variants.some(
+                    (v) => v.color?.id === color.id && v.quantity > 0
+                  )
+                  return (
+                    <Link
+                      key={color.id}
+                      href={{
+                        pathname: `/products/${slug}`,
+                        query: { size: selectedSizeId, color: color.id },
+                      }}
+                      replace
+                      scroll={false}
+                      className={cn(
+                        'rounded-md p-1 m-2 transition-all',
+                        selectedColorId === color.id
+                          ? 'ring-2 ring-offset-2 ring-indigo-500'
+                          : 'ring-1 ring-gray-300 ',
+                        !isAvailable &&
+                          'opacity-50 cursor-not-allowed pointer-events-none'
+                      )}
+                    >
+                      <div
+                        className="size-8 rounded-md"
+                        style={{ backgroundColor: color.hex }}
+                      />
+                    </Link>
+                  )
+                })}
+              </div>
             </div>
           </article>
         </article>
@@ -251,7 +243,6 @@ const ProductPage: FC<ProductPageProp> = ({
           {currentVariant && currentVariant.quantity > 0
             ? 'موجود'
             : 'اتمام موجودی'}
-          {/* Show remaining quantity */}
           {currentVariant && currentVariant.quantity > 0 && (
             <span className="text-xs text-gray-500">
               ({currentVariant.quantity} عدد باقی مانده)
@@ -312,7 +303,6 @@ const ProductPage: FC<ProductPageProp> = ({
         <Separator />
         <article className="flex flex-col gap-6 items-start py-12">
           <div className="flex flex-col gap-4 justify-around">
-            {/* <p className="text-sm">{name}</p> */}
             {description && (
               <div className="flex  gap-3">
                 <p className="font-semibold ">توضیحات:</p>

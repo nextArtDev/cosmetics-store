@@ -152,6 +152,7 @@ const ProductDetails: FC<ProductFormProps> = ({
         width: v.width || 0,
         height: v.height || 0,
         sku: v.sku || '',
+        images: v.images ?? [],
       })) ?? [
         {
           size: '',
@@ -379,33 +380,11 @@ const ProductDetails: FC<ProductFormProps> = ({
                 <ImageInput
                   name="variantImages"
                   label="عکس وریانتها"
-                  initialDataImages={
-                    data?.variants?.map((v) => v.images)[0] ?? []
-                  }
+                  initialDataImages={data?.variants?.flatMap(
+                    (vr) => vr.images ?? []
+                  )}
                   createVariantFromColor={createVariantFromColor}
                 />
-                {/* <div className="space-y-4">
-                  <ClickToAddInputsRHF
-                    fields={variantFields}
-                    name="variants"
-                    control={form.control}
-                    register={form.register}
-                    setValue={form.setValue}
-                    getValues={form.getValues}
-                    onAppend={() => appendColor({ color: '' })}
-                    onRemove={removeColor}
-                    initialDetailSchema={{ color: '' }}
-                    header="رنگها"
-                    colorPicker
-                    isMandatory
-                  />
-                  {form.formState.errors.colors && (
-                    <span className="text-sm font-medium text-destructive">
-                      {form.formState.errors.colors.message ||
-                        (form.formState.errors.colors as any)?.root?.message}
-                    </span>
-                  )}
-                </div> */}
               </div>
 
               <InputFieldset label="انواع محصول (وریانت‌ها)" isMandatory>
