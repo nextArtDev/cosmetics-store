@@ -304,6 +304,138 @@ export async function updateProfile(user: { name: string; phone?: string }) {
   }
 }
 
+// export const toggleWishlistItem = async (
+//   productId: string
+//   // productSlug: string
+// ) => {
+//   // Ensure the user is authenticated
+//   const user = await currentUser()
+
+//   // if (!user || !user.id) throw new Error('Unauthenticated.')
+//   if (!user || !user.id) redirect('/sign-in')
+
+//   const userId = user.id
+//   console.log({ userId })
+//   try {
+//     // Check if the item already exists in the wishlist
+//     const existingWishlistItem = await prisma.wishlist.findFirst({
+//       where: {
+//         userId,
+//         productId,
+//         // variantId,
+//       },
+//     })
+//     console.log({ existingWishlistItem })
+//     if (existingWishlistItem) {
+//       // If it exists, remove it from the wishlist
+//       await prisma.wishlist.delete({
+//         where: {
+//           id: existingWishlistItem.id,
+//         },
+//       })
+//       // return {
+//       //   message: 'محصول از لیست علاقه‌مندی‌ها حذف شد.',
+//       //   state: 'Removed',
+//       // }
+//     } else {
+//       // If it doesn't exist, add it to the wishlist
+//       const add = await prisma.wishlist.create({
+//         data: {
+//           userId,
+//           productId,
+//           // variantId,
+//         },
+//       })
+//       console.log({ add })
+//       // return {
+//       //   message: 'محصول به لیست علاقه‌مندی‌ها اضافه شد.',
+//       //   state: 'Added',
+//       // }
+//     }
+//   } catch (error) {
+//     throw error
+//   } finally {
+//     // revalidatePath(`/products/${productSlug}`)
+//   }
+// }
+
+interface ActionState {
+  errors: {
+    _form?: string[]
+    [key: string]: string[] | undefined
+  }
+  message?: string
+  success?: boolean
+}
+
+export async function toggleWishlistItem(
+  path: string,
+  productId: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  formState: ActionState,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  formData: FormData
+): Promise<ActionState> {
+  try {
+    const user = await currentUser()
+
+    if (!user || !user.id) {
+      redirect('/sign-in')
+    }
+
+    const userId = user.id
+
+    // Check if the item already exists in the wishlist
+    const existingWishlistItem = await prisma.wishlist.findFirst({
+      where: {
+        userId,
+        productId,
+      },
+    })
+
+    if (existingWishlistItem) {
+      // If it exists, remove it from the wishlist
+      await prisma.wishlist.delete({
+        where: {
+          id: existingWishlistItem.id,
+        },
+      })
+
+      revalidatePath(path)
+      return {
+        errors: {},
+        message: 'محصول از لیست علاقه‌مندی‌ها حذف شد.',
+        success: true,
+      }
+    } else {
+      await prisma.wishlist.create({
+        data: {
+          userId,
+          productId,
+        },
+      })
+
+      revalidatePath(path)
+      return {
+        errors: {},
+        message: 'محصول به لیست علاقه‌مندی‌ها اضافه شد.',
+        success: true,
+      }
+    }
+  } catch (err: unknown) {
+    console.error('Error in toggleWishlistItem:', err)
+    const message =
+      err instanceof Error ? err.message : 'مشکلی در سرور پیش آمده.'
+
+    return {
+      errors: {
+        _form: [message],
+      },
+      success: false,
+    }
+  }
+}
+
 // interface SignOutFormState {
 //   errors: {
 //     _form?: string[]
@@ -322,7 +454,6 @@ export async function updateProfile(user: { name: string; phone?: string }) {
 
 //   try {
 //     const ascr = await authClient.signOut()
-//     console.log({ ascr })
 //   } catch (err: unknown) {
 //     if (err instanceof Error) {
 //       return {

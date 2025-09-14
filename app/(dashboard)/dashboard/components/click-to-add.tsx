@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// components/click-to-add-rhf.tsx
 'use client'
 import React from 'react'
 import {
@@ -9,7 +8,7 @@ import {
   UseFormSetValue,
   UseFormGetValues,
   Path,
-  useWatch, // 1. Import useWatch
+  useWatch,
 } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'

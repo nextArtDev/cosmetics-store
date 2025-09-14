@@ -19,6 +19,8 @@ import RelatedProductCarousel from '@/components/product/related-products-carous
 import Countdown from './count-down'
 import ProductProperties from './ProductProperties'
 
+import BookmarkBtn from './BookmarkBtn'
+
 type ProductPageProp = {
   data: NonNullable<ProductDetails>
   userId?: string | null
@@ -28,6 +30,7 @@ type ProductPageProp = {
   selectedSizeId: string
   selectedColorId: string
   relatedProducts: RelatedProduct[] | null
+  isInWishList: boolean
 }
 const ProductPage: FC<ProductPageProp> = ({
   data,
@@ -39,6 +42,7 @@ const ProductPage: FC<ProductPageProp> = ({
 
   selectedColorId,
   selectedSizeId,
+  isInWishList,
 }) => {
   const {
     description,
@@ -128,16 +132,26 @@ const ProductPage: FC<ProductPageProp> = ({
 
         {/* <ProductDetails /> */}
         <article className="grid grid-row-5 gap-4">
-          <div className="flex gap-2">
-            {productAverageRating && (
-              <>
-                <SingleStarRating rating={productAverageRating.rating} />
-                {productAverageRating.rating}
-                <p>{' از'}</p>
-                {productAverageRating.count}
-                <p>{' نفر'}</p>
-              </>
-            )}
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex gap-2">
+              {productAverageRating && (
+                <>
+                  <SingleStarRating rating={productAverageRating.rating} />
+                  {productAverageRating.rating}
+                  <p>{' از'}</p>
+                  {productAverageRating.count}
+                  <p>{' نفر'}</p>
+                </>
+              )}
+            </div>
+            {/* <Bookmark
+              onClick={async () => await toggleWishlistItem(id)}
+              className={cn(
+                'cursor-pointer',
+                isInWishList ? 'fill-indigo-500' : 'fill-none'
+              )}
+            /> */}
+            <BookmarkBtn isInWishList={isInWishList} productId={id} />
           </div>
           <p className="text-sm font-semibold">{brand}</p>
           <p className="text-base font-bold">
