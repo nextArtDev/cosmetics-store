@@ -43,12 +43,12 @@ export default function SearchSidebar({
           />
 
           {/* Color Filter */}
-          <AttributeFilter
+          {/* <AttributeFilter
             title="رنگ"
-            items={filtersData.colors}
+            items={filtersData.colors.map((clr) => clr)}
             selectedItems={currentFilters.colors || []}
             onSelectionChange={(colors) => onFiltersChange({ colors, page: 1 })}
-          />
+          /> */}
 
           {/* Size Filter */}
           <AttributeFilter

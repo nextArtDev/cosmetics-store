@@ -76,7 +76,7 @@ export default function PriceFilter({
     localMax !== (selectedMaxPrice || filtersData.priceRange.max)
 
   return (
-    <Card dir="rtl" className=" rounded-none">
+    <Card dir="ltr" className=" rounded-none">
       <CardHeader className="pb-3">
         <CardTitle className="text-base font-medium">محدوده قیمت</CardTitle>
       </CardHeader>

@@ -232,7 +232,7 @@ export async function searchProducts({
   maxPrice,
   sortBy = 'newest',
   page = 1,
-  limit = 20,
+  limit = 30,
   colors,
   sizes,
   brands,
@@ -602,7 +602,7 @@ export async function getFiltersData(
           variants: { some: { product: where } },
         },
         select: { name: true, hex: true },
-        distinct: ['name'],
+        distinct: ['hex'],
       }),
       // Get available sizes
       prisma.size.findMany({
@@ -627,7 +627,7 @@ export async function getFiltersData(
         min: priceRange._min.price || 0,
         max: priceRange._max.price || 1000000,
       },
-      colors: colors.map((c) => c.name),
+      colors: colors.map((c) => c.hex),
       sizes: sizes.map((s) => s.name),
       brands: brands.map((b) => b.brand),
     }

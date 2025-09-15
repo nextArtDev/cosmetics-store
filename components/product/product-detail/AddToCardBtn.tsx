@@ -145,15 +145,19 @@ const AddToCardBtn: FC<AddToCardBtnProps> = ({ product, variant }) => {
       )}
     >
       <p>خرید</p>
-      {variant.discount && (
+      {!!variant.discount ? (
         <div className="flex items-center gap-1">
           {variant.discount > 0 && (
             <p className="text-red-300">{finalPrice} تومان</p>
           )}
           <p className={cn('', variant.discount && 'line-through')}>
-            {finalPrice} تومان
+            {variant.price} تومان
           </p>
         </div>
+      ) : (
+        <p className={cn('', variant.discount && 'line-through')}>
+          {variant.price} تومان
+        </p>
       )}
     </Button>
   )

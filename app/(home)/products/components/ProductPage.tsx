@@ -21,6 +21,7 @@ import ProductProperties from './ProductProperties'
 
 import BookmarkBtn from './BookmarkBtn'
 import ViewNumbers from './view-numbers'
+import ProductBreadcrumb from './ProductBreadcrumb'
 
 type ProductPageProp = {
   data: NonNullable<ProductDetails>
@@ -55,7 +56,7 @@ const ProductPage: FC<ProductPageProp> = ({
     variants,
 
     brand,
-    // subCategory,
+    subCategory,
     id,
     name,
     slug,
@@ -106,6 +107,17 @@ const ProductPage: FC<ProductPageProp> = ({
   // console.log(images)
   return (
     <section className="relative pb-24 w-full h-full">
+      <ProductBreadcrumb
+        links={[
+          { id: '1', label: 'خارک', href: '/' },
+          {
+            id: '2',
+            label: subCategory.name,
+            href: `/sub-categories/${subCategory.url}`,
+          },
+          { id: '3', label: name, href: slug },
+        ]}
+      />
       <div
         className="absolute inset-0 -z-10"
         style={{
@@ -128,17 +140,15 @@ const ProductPage: FC<ProductPageProp> = ({
         {/* <ProductDetails /> */}
         <article className="grid grid-row-5 gap-4">
           <div className="flex items-center justify-between gap-2">
-            <div className="flex gap-2">
-              {productAverageRating && (
-                <>
-                  <SingleStarRating rating={productAverageRating.rating} />
-                  {productAverageRating.rating}
-                  <p>{' از'}</p>
-                  {productAverageRating.count}
-                  <p>{' نفر'}</p>
-                </>
-              )}
-            </div>
+            {productAverageRating && (
+              <div className="flex gap-2">
+                <SingleStarRating rating={productAverageRating.rating} />
+                {productAverageRating.rating}
+                <p>{' از'}</p>
+                {productAverageRating.count}
+                <p>{' نفر'}</p>
+              </div>
+            )}
 
             <ViewNumbers views={views} />
             <BookmarkBtn isInWishList={isInWishList} productId={id} />
